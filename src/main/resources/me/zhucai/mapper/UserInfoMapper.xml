@@ -14,4 +14,23 @@
             user_info
         WHERE username=#{username}
     </select>
+
+    <insert id="insert" parameterType="me.zhucai.entity.UserInfo">
+        INSERT INTO user_info
+            (`uid`,
+            `name`,
+            `password`,
+            `salt`,
+            `state`,
+            `username`)
+        VALUES
+            (
+            #{uid},
+            #{name},
+            #{password},
+            #{salt},
+            #{state},
+            #{username}
+            )
+    </insert>
 </mapper>

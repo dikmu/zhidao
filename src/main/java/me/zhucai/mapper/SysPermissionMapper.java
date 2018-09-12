@@ -13,5 +13,5 @@ import java.util.List;
 @Component
 public interface SysPermissionMapper {
     //根据角色ID查询角色对应的权限信息
-    List<SysPermission> findPermissionByRoleId(@Param("roleId") Integer roleId);
+    List<SysPermission> findPermissionByRoleId(@Param("roleId") String roleId);
 }
