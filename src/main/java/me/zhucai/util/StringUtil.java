@@ -1,4 +1,4 @@
-package me.zhucai.zhidao.util;
+package me.zhucai.util;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

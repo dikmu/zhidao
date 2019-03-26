@@ -25,7 +25,9 @@ import java.util.*;
 
 @RestController
 @SpringBootApplication
-public class ReadEpubLibIntoELK {
+public class ReadEpubLibIntoEsRest {
+
+    static boolean pushToES = false;
 
     public static int maxcount = 0;
     int GlobalIndex = 1;//Book ID
@@ -121,9 +123,9 @@ public class ReadEpubLibIntoELK {
     /**
      * 顺序处理所有epub
      */
-    public void iteratorCalibreLib(String dir, String filterIds) throws Exception {
-        File fileTotal = new File(ConstantUtil.LOCAL_EPUB_LIB_DIR + "/Total.txt");
-        File fileIds = new File(ConstantUtil.LOCAL_EPUB_LIB_DIR + "/Ids.txt");
+    public void iteratorCalibreLib(String dir, String filterIds, String totalFile, String idsFile) throws Exception {
+        File fileTotal = new File(totalFile);
+        File fileIds = new File(idsFile);
         ByteBuffer byteBuffer = ByteBuffer.wrap("".getBytes());
         FileOutputStream fos = new FileOutputStream(fileTotal, true);
         FileOutputStream fos2 = new FileOutputStream(fileIds, true);
@@ -133,17 +135,24 @@ public class ReadEpubLibIntoELK {
             if (files != null) {
                 for (File file : files) {
                     if (file.isFile() && file.getName().indexOf(".opf") != -1) {
-                        EpubMeta epubMeta = opf2EpubMeta(file, filterIds);
-                        if (epubMeta == null) {
-                            //此书已转换过，并记录到ids文件中
-                            continue;
-                        } else {
-                            boolean success = writeBookToELK(epubMeta);
-                            fos.write(("{'CalibreId':'" + epubMeta.getCalibreId() + "','Title':'" + epubMeta.getTitle() + "','success':'" + success + "'},\n").getBytes());
-                            fos2.write((epubMeta.getCalibreId() + ",").getBytes());
+                        try {
+                            EpubMeta epubMeta = opf2EpubMeta(file, filterIds);
+                            if (epubMeta == null) {
+                                //此书已转换过，并记录到ids文件中
+                                GlobalIndex++;
+                                System.out.println(GlobalIndex);
+                                continue;
+                            } else {
+                                boolean success = writeBookToELK(epubMeta);
+                                fos.write(("{'CalibreId':'" + epubMeta.getCalibreId() + "','Title':'" + epubMeta.getTitle()
+                                        + "','success':'" + success + "'},\n").getBytes());
+                                fos2.write((epubMeta.getCalibreId() + ",").getBytes());
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
                     } else if (file.isDirectory()) {
-                        iteratorCalibreLib(file.getAbsolutePath(), filterIds);
+                        iteratorCalibreLib(file.getAbsolutePath(), filterIds, totalFile, idsFile);
                     }
                 }
             }
@@ -210,13 +219,20 @@ public class ReadEpubLibIntoELK {
         }
         jsonMap.put("HasTxt", hasTxt);
         String titleMd5 = CyptUtil.md5(epubMeta.getTitle());
-        IndexRequest request = new IndexRequest("store", "epub", titleMd5)
-                .source(jsonMap);
+        IndexRequest request = new IndexRequest("store", "epub", titleMd5).source(jsonMap);
         GlobalIndex++;
         try {
-            IndexResponse indexResponse = client.index(request);
-            System.out.println("Status:" + indexResponse.status() + ",Title:" + jsonMap.get("Title") + ",TitleMD5:" + titleMd5 + ",GlobalIndex" + GlobalIndex);
-//            System.out.println(indexResponse);
+            if (pushToES) {
+                IndexResponse indexResponse = client.index(request);
+                System.out.println(
+                        "Status:" + indexResponse.status() + ",Title:" + jsonMap.get("Title") + ",TitleMD5:" + titleMd5
+                                + ",GlobalIndex" + GlobalIndex);
+            } else {
+                System.out.println(
+                        "Status: not push" + ",Title:" + jsonMap.get("Title") + ",TitleMD5:" + titleMd5 + ",GlobalIndex"
+                                + GlobalIndex);
+            }
+            //            System.out.println(indexResponse);
             return true;
         } catch (IOException e) {
             e.printStackTrace();
@@ -224,8 +240,8 @@ public class ReadEpubLibIntoELK {
         return false;
     }
 
-    public String getIdsFromIdsFile() {
-        try (BufferedReader br = new BufferedReader(new FileReader(ConstantUtil.LOCAL_EPUB_LIB_DIR + "/Ids.txt"))) {
+    public String getIdsFromIdsFile(String idsFile) {
+        try (BufferedReader br = new BufferedReader(new FileReader(idsFile))) {
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
             while (line != null) {
@@ -242,13 +258,17 @@ public class ReadEpubLibIntoELK {
         return null;
     }
 
+    /**
+     * 刷新正常书库
+     *
+     * @return
+     */
     @GetMapping(path = "readEpubLibIntoELK")
     public String run() {
-        client = new RestHighLevelClient(
-                RestClient.builder(
-                        new HttpHost("localhost", 9200, "http")));
+        client = new RestHighLevelClient(RestClient.builder(new HttpHost("localhost", 9200, "http")));
         try {
-            iteratorCalibreLib(ConstantUtil.LOCAL_EPUB_LIB_DIR, getIdsFromIdsFile());
+            iteratorCalibreLib(ConstantUtil.LOCAL_EPUB_LIB_DIR, getIdsFromIdsFile(ConstantUtil.LOCAL_EPUB_IDS), ConstantUtil.LOCAL_EPUB_TOTAL, ConstantUtil.LOCAL_EPUB_IDS);
+            iteratorCalibreLib(ConstantUtil.LOCAL_EPUB_LIB_DIR_ERROR, getIdsFromIdsFile(ConstantUtil.LOCAL_EPUB_IDS_ERROR), ConstantUtil.LOCAL_EPUB_TOTAL_ERROR, ConstantUtil.LOCAL_EPUB_IDS_ERROR);
             return "ok";
         } catch (Exception e) {
             e.printStackTrace();
@@ -258,12 +278,10 @@ public class ReadEpubLibIntoELK {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            System.out.println("over");
         }
         return null;
     }
 
-    public static void main(String[] args) throws Exception {
-        new ReadEpubLibIntoELK().run();
-    }
 
 }

@@ -1,6 +1,6 @@
 package me.zhucai.config;
 
-import me.zhucai.entity.UserInfo;
+import me.zhucai.bean.UserInfo;
 import me.zhucai.mapper.SysPermissionMapper;
 import me.zhucai.mapper.SysRoleMapper;
 import me.zhucai.service.UserInfoService;

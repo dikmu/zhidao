@@ -1,4 +1,4 @@
-package me.zhucai.zhidao.util;
+package me.zhucai.util;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

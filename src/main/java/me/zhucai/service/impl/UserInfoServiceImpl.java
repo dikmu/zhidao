@@ -1,7 +1,6 @@
 package me.zhucai.service.impl;
 
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import me.zhucai.entity.UserInfo;
+import me.zhucai.bean.UserInfo;
 import me.zhucai.mapper.UserInfoMapper;
 import me.zhucai.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-    public String inserUser(UserInfo userInfo){
+    public String insert(UserInfo userInfo) {
         String uid = UUID.randomUUID().toString().replaceAll("-","");
         userInfo.setUid(uid);
         return uid;

@@ -1,4 +1,4 @@
-package me.zhucai.entity;
+package me.zhucai.bean;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

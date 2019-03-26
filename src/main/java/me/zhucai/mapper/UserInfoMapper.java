@@ -1,6 +1,6 @@
 package me.zhucai.mapper;
 
-import me.zhucai.entity.UserInfo;
+import me.zhucai.bean.UserInfo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +13,6 @@ public interface UserInfoMapper {
     //通过username查找用户信息
     UserInfo findByUsername(@Param("username") String username);
 
-    void inserUser(UserInfo userInfo);
+    int insert(UserInfo userInfo);
 
 }

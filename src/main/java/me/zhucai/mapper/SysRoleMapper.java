@@ -1,6 +1,6 @@
 package me.zhucai.mapper;
 
-import me.zhucai.entity.SysRole;
+import me.zhucai.bean.SysRole;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 

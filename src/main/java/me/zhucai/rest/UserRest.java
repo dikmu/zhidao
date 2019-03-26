@@ -1,7 +1,8 @@
 package me.zhucai.rest;
 
 import com.alibaba.fastjson.JSONObject;
-import me.zhucai.entity.UserInfo;
+import me.zhucai.bean.UserInfo;
+import me.zhucai.mapper.UserInfoMapper2;
 import me.zhucai.service.UserInfoService;
 import org.apache.shiro.crypto.RandomNumberGenerator;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/user")
 public class UserRest {
@@ -20,15 +23,48 @@ public class UserRest {
     @Autowired
     UserInfoService userInfoService;
 
+    @Autowired
+    public UserInfoMapper2 userInfoMapper2;
+
     @PostMapping()
     public String createUser(@RequestBody JSONObject jsonObject) {
         System.out.println(jsonObject);
-        UserInfo userInfo =new UserInfo();
-        userInfo.setName(jsonObject.getString("name"));
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUsername(jsonObject.getString("username"));
+        userInfo.setPassword(jsonObject.getString("password"));
+        userInfo.setSalt(jsonObject.getString("salt"));
+        userInfo.setState(jsonObject.getString("state"));
         System.out.println(userInfo);
-        String id = userInfoService.inserUser(userInfo);
+        String id = userInfoService.insert(userInfo);
         System.out.println(id);
         return id;
+    }
+
+    @PostMapping()
+    @RequestMapping("/test")
+    public String createUserTest(@RequestBody JSONObject jsonObject) {
+        System.out.println(jsonObject);
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUsername(jsonObject.getString("username"));
+        userInfo.setPassword(jsonObject.getString("password"));
+        userInfo.setSalt(jsonObject.getString("salt"));
+        userInfo.setState(jsonObject.getString("state"));
+        userInfo.setUid(UUID.randomUUID().toString().replaceAll("-", ""));
+        int i=userInfoMapper2.insert(userInfo);
+        System.out.println(i);
+        return "ok"+i;
+    }
+
+    @PostMapping()
+    @RequestMapping("/test1")
+    public String test1(@RequestBody JSONObject jsonObject){
+       return ""+userInfoMapper2.selectAll().size();
+    }
+
+    @PostMapping()
+    @RequestMapping("/test2")
+    public String test2(@RequestBody JSONObject jsonObject){
+        return ""+userInfoMapper2.selectById(jsonObject.getString("UID")).toString();
     }
 
     public static void main(String[] args) {

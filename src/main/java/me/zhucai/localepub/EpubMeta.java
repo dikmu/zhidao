@@ -1,4 +1,4 @@
-package me.zhucai.zhidao.localepub;
+package me.zhucai.localepub;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -102,7 +102,6 @@ public class EpubMeta {
     }
 
     public String getRelatedPath() {
-        System.out.println(dirPath);
         return dirPath;
     }
 

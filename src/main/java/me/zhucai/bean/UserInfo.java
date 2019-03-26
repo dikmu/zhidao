@@ -1,4 +1,4 @@
-package me.zhucai.entity;
+package me.zhucai.bean;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;
-import java.util.List;
 
 /**
  * @author muhongdi
@@ -18,17 +17,15 @@ import java.util.List;
 public class UserInfo implements Serializable {
     String uid;//用户id
     String username;//帐号
-    String name;
     String password;
     String salt;
-    byte state;
+    String state;
 
     @Override
     public String toString() {
         return "UserInfo{" +
                 "uid='" + uid + '\'' +
                 ", username='" + username + '\'' +
-                ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
                 ", salt='" + salt + '\'' +
                 ", state=" + state +

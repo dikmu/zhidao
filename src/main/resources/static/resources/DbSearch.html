@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/resources/bootstrap-4.1.3-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="bootstrap-4.1.3-dist/css/bootstrap.css">
     <title>My Search</title>
     <style>
         #template {
@@ -35,20 +35,20 @@
 <div class="container">
     <div class="form-row">
         <div class="col-md-12 mb-3">
-            <label>My Search</label>
+            <label>精确搜索</label>
         </div>
     </div>
     <form>
         <div class="form-row">
-            <div class="col-md-5 mb-3">
-                <input type="text" class="form-control" id="search_title_in" placeholder="Enter Title">
-            </div>
             <div class="col-md-5 mb-3">
                 <input type="text" class="form-control" id="search_content_in" placeholder="Enter Content">
             </div>
             <div class="col-md-2 mb-3">
                 <button id="search-btn" type="button" class="btn btn-primary btn-block disabled" disabled>Search</button>
             </div>
+        </div>
+        <div class="form-row">
+            多个词用 + 或 空格 分隔
         </div>
     </form>
     <div id="template">
@@ -78,10 +78,10 @@
 </div>
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script type="text/javascript" src="/resources/jquery.min.js"></script>
-<script type="text/javascript" src="/resources/bootstrap-4.1.3-dist/js/popper.min.js"></script>
-<script type="text/javascript" src="/resources/bootstrap-4.1.3-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="bootstrap-4.1.3-dist/js/popper.min.js"></script>
+<script type="text/javascript" src="bootstrap-4.1.3-dist/js/bootstrap.min.js"></script>
 <!-- Optional JavaScript -->
-<script type="text/javascript" src="/resources/index.js"></script>
+<script type="text/javascript" src="dbSearch.js"></script>
 </body>
 </html>

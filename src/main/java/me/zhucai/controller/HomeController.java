@@ -1,8 +1,6 @@
 package me.zhucai.controller;
 
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.IncorrectCredentialsException;
-import org.apache.shiro.authc.UnknownAccountException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -15,9 +13,20 @@ import java.util.Map;
  */
 @Controller
 public class HomeController {
+
     @RequestMapping({"/", "/index"})
     public String index() {
         return "/index";
+    }
+
+    @RequestMapping({"/", "/es"})
+    public String es() {
+        return "/EsSearch";
+    }
+
+    @RequestMapping({"/", "/db"})
+    public String db() {
+        return "/DbSearch";
     }
 
     // 这里如果不写method参数的话，默认支持所有请求，如果想缩小请求范围，还是要添加method来支持get, post等等某个请求。

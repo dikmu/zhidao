@@ -1,7 +1,7 @@
-package me.zhucai.zhidao.localepub;
+package me.zhucai.localepub;
 
-import me.zhucai.zhidao.util.ConstantUtil;
-import me.zhucai.zhidao.util.FileNameUtil;
+import me.zhucai.util.ConstantUtil;
+import me.zhucai.util.FileNameUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,7 +20,7 @@ public class LocalEpubManager {
     public static List getAllEpubInDisk() {
         List<String> newBooks = new FileNameUtil().getFilesInDir(ConstantUtil.NEW_EPUB_DIR);
         List<String> convertedBooks = new FileNameUtil().getFilesInDir("J:\\备份\\epub源文件");
-        List totalList = new ArrayList(newBooks.size() + convertedBooks.size()  + 1);
+        List totalList = new ArrayList(newBooks.size() + convertedBooks.size() + 1);
         for (String s : newBooks) {
             totalList.add(s);
         }
@@ -31,7 +31,7 @@ public class LocalEpubManager {
         return totalList;
     }
 
-    public static void readLocalBookToELK(){
+    public static void readLocalBookToELK() {
 
     }
 

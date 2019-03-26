@@ -2,10 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="me.zhucai.mapper.UserInfoMapper">
 
-    <select id="findByUsername" resultType="me.zhucai.entity.UserInfo">
+    <select id="findByUsername" resultType="me.zhucai.bean.UserInfo">
         SELECT
             user_info.uid,
-            user_info.`name`,
             user_info.`password`,
             user_info.salt,
             user_info.state,
@@ -15,7 +14,7 @@
         WHERE username=#{username}
     </select>
 
-    <insert id="insert" parameterType="me.zhucai.entity.UserInfo">
+    <insert id="insert" parameterType="me.zhucai.bean.UserInfo">
         INSERT INTO user_info
             (`uid`,
             `name`,

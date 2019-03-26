@@ -1,6 +1,6 @@
 package me.zhucai.service;
 
-import me.zhucai.entity.UserInfo;
+import me.zhucai.bean.UserInfo;
 
 /**
  * @author muhongdi
@@ -10,5 +10,5 @@ public interface UserInfoService {
     /**通过username查找用户信息;*/
     UserInfo findByUsername(String username);
 
-    String inserUser(UserInfo userInfo);
+    String insert(UserInfo userInfo);
 }
