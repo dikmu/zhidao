@@ -22,3 +22,6 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+!/src/main/resources/static/vendors/jquery/dist/
+!/src/main/resources/static/vendors/bootstrap/dist/
+!/src/main/resources/static/build/
