@@ -8,10 +8,12 @@ import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.SimpleCookie;
+import org.apache.shiro.web.util.WebUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 
+import javax.servlet.http.HttpServletRequest;
 import java.security.MessageDigest;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -25,18 +27,14 @@ import java.util.Properties;
 public class ShiroConfig {
     @Bean
     public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager) {
-
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
-
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         filterChainDefinitionMap.put("/logout", "logout");
-        filterChainDefinitionMap.put("/page/**", "user");
-        filterChainDefinitionMap.put("/", "user");
-        filterChainDefinitionMap.put("/favicon.ico", "anon");
-        filterChainDefinitionMap.put("/resources/**", "anon");
+        filterChainDefinitionMap.put("/pages/**", "user");
         filterChainDefinitionMap.put("/epubee/**", "anon");
-        filterChainDefinitionMap.put("/db/readTotal2DB", "anon");
+        filterChainDefinitionMap.put("/", "anon");
+        filterChainDefinitionMap.put("/rest/**", "user");
         //authc表示需要验证身份才能访问，还有一些比如anon表示不需要验证身份就能访问等。
         shiroFilterFactoryBean.setLoginUrl("/login");
         shiroFilterFactoryBean.setSuccessUrl("/index");

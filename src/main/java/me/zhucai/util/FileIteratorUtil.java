@@ -25,7 +25,7 @@ public class FileIteratorUtil {
             for (File file : files) {
                 if (file.isFile()) {
                     LocalBookSet.add(file.getPath());
-                    System.out.println(file.getName());
+//                    System.out.println(file.getName());
                 } else if (file.isDirectory()) {
                     iteratorPath(file.getAbsolutePath());
                 }

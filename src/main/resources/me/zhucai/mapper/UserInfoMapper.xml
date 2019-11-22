@@ -4,24 +4,24 @@
 
     <select id="findByUsername" resultType="me.zhucai.bean.UserInfo">
         SELECT
-            user_info.uid,
-            user_info.`password`,
-            user_info.salt,
-            user_info.state,
-            user_info.username
+          user_info.uid,
+          user_info.password,
+          user_info.salt,
+          user_info.state,
+          user_info.username
         FROM
-            user_info
+          user_info user_info
         WHERE username=#{username}
     </select>
 
     <insert id="insert" parameterType="me.zhucai.bean.UserInfo">
         INSERT INTO user_info
-            (`uid`,
-            `name`,
-            `password`,
-            `salt`,
-            `state`,
-            `username`)
+            (uid,
+            name,
+            password,
+            salt,
+            state,
+            username)
         VALUES
             (
             #{uid},

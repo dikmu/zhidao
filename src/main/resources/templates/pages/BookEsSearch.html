@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>电子书检索</title>
+
+    <script th:inline="javascript">
+        var GlobalData = [[${GlobalData}]];
+    </script>
+
+    <!-- Bootstrap -->
+    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- bootstrap-progressbar -->
+    <link href="../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <!-- PNotify -->
+    <link href="../vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+    <!-- Switchery -->
+    <link href="../vendors/switchery/dist/switchery.min.css" rel="stylesheet">
+    <!-- PNotify -->
+    <link href="../vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+    <!--<link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">-->
+    <!-- Custom Theme Style -->
+    <link href="../build/css/custom.min.css" rel="stylesheet">
+
+    <style>
+        #template {
+            display: none;
+        }
+
+        em {
+            color: red;
+        }
+
+        #more-btn {
+            margin-top: 20px;
+        }
+
+        #search-result, #search-result .col-md-12 {
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+
+        .resultLine {
+            cursor: pointer
+        }
+
+        .hiddenElement {
+            display: none;
+        }
+
+        #user-recent-search {
+            margin-top: 30px;
+        }
+
+        #hot-search {
+            margin-top: 50px;
+        }
+
+        #view-detail-container .mail_view {
+            margin: 20px auto 20px auto;
+        }
+    </style>
+
+</head>
+
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+
+        <div th:insert="~{common :: nav_menu_bar}"></div>
+
+        <!-- page content -->
+        <div class="right_col" role="main" style="min-height: 951px;">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3><a href="./BookTitleSearch">电子书检索</a></h3>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="x_panel">
+                    <!--查询框-->
+                    <div id="search-input-container" class="col-md-12 col-sm-12 col-xs-12">
+                        <br/>
+                        <div class="x_content">
+                            <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                                <input type="text" id="search_content_in" required="required"
+                                       class="form-control col-md-7 col-xs-12" placeholder="正文">
+                            </div>
+                            <div class="form-group col-md-3 col-sm-6 col-xs-12">
+                                <input type="text" id="search_title_in" required="required"
+                                       class="form-control col-md-7 col-xs-12" placeholder="书名">
+                            </div>
+                            <div class="form-group col-md-3 col-sm-6 col-xs-12">
+                                <button id="search-btn" type="button" class="btn btn-primary btn-block disabled"
+                                        disabled>
+                                    搜索
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!--查询结果-->
+                    <div id="search-result-container" class="col-md-12 col-sm-12 col-xs-12 hiddenElement">
+                        <br/>
+                        <div class="form-row">
+                            <div id="search-status" class="form-group col-md-12 col-sm-12 col-xs-12 hiddenElement">
+                                <label>查询结果 共:<span id="result_count">0</span>条 , 耗时 <span
+                                        id="time_used">0</span>毫秒</label>
+                                <div class="ln_solid"></div>
+                            </div>
+                        </div>
+                        <div id="template">
+                            <div class="list-group col-md-12 col-sm-12 col-xs-12">
+                                <div class="list-group-item list-group-item-action flex-column align-items-start">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1">$BookName</h5>
+                                    </div>
+                                    <p class="mb-1">$highlights</p>
+                                    <small class="hiddenElement">$_id</small>
+                                    <small><a style="margin-left:10px" href="$DownloadBook">下载</a></small>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="search-result" class="form-row list-group col-md-12 col-sm-12 col-xs-12">
+                        </div>
+                        <div id="search-loading" class="form-row list-group col-md-12 col-sm-12 col-xs-12" style="font-size:medium;text-align:center;">
+                        </div>
+                        <div class="form-row">
+                            <div id="search-status1" class="form-group col-md-12 col-sm-12 col-xs-12 hiddenElement">
+                                <div class="ln_solid"></div>
+                                <label>查询结果 共:<span id="result_count1">0</span>条 , 耗时 <span
+                                        id="time_used1">0</span>毫秒</label>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-12 mb-3 more-frame">
+                                <button id="more-btn" type="button" class="btn btn-primary btn-lg btn-block hiddenElement">加载更多 ...
+                                </button>
+                            </div>
+                        </div>
+                        <div id="modal-container">
+                            <!-- Large modal -->
+                            <button id="modal-button" type="button" class="hiddenElement btn btn-primary"
+                                    data-toggle="modal"
+                                    data-target=".bs-example-modal-lg">
+                                Large modal
+                            </button>
+                            <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal"><span
+                                                    aria-hidden="true">×</span>
+                                            </button>
+                                            <h4 class="modal-title" id="myModalLabel">操作被限制</h4>
+                                        </div>
+                                        <div id="modal-tips" class="modal-body">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                                            </button>
+                                            <button id="suggest-upgrade-vip" type="button" class="btn btn-primary">
+                                                升级账号
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <!--hot search-->
+                    <div id="hot-search-container" class="col-md-12 col-sm-12 col-xs-12">
+                        <br/>
+                        <div class="form-row">
+                            <div id="user-recent-search" class="list-group col-md-12">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div id="hot-search" class="list-group col-md-12">
+                            </div>
+                        </div>
+                    </div>
+                    <!--查看图书内容-->
+                    <div id="view-detail-container" class="hiddenElement">
+                        <div class="col-sm-9 mail_view">
+                            <div class="inbox-body">
+                                <div class="mail_heading row">
+                                    <div class="col-md-8">
+                                        <div class="btn-group">
+                                            <button class="btn btn-sm btn-primary" onclick="showEsSearch()"
+                                                    type="button"><i
+                                                    class="fa fa-reply"></i> 返回
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ln_solid"></div>
+                                <br/>
+                                <div id="viewDetail" class="view-mail">
+                                </div>
+                                <br/>
+                                <div class="ln_solid"></div>
+                                <div class="btn-group">
+                                    <button class="btn btn-sm btn-primary" onclick="showEsSearch()" type="button"><i
+                                            class="fa fa-reply"></i> 返回
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- /CONTENT MAIL -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <!-- /page content -->
+
+    <!-- footer content -->
+    <footer>
+        <div class="pull-right">
+            Gentelella - Bootstrap Admin Template by 123<a href="https://colorlib.com">Colorlib</a>
+        </div>
+        <div class="clearfix"></div>
+    </footer>
+    <!-- /footer content -->
+</div>
+</div>
+
+
+<!-- jQuery -->
+<script src="../vendors/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<!-- FastClick -->
+<script src="../vendors/fastclick/lib/fastclick.js"></script>
+<!-- NProgress -->
+<script src="../vendors/nprogress/nprogress.js"></script>
+<!-- bootstrap-progressbar -->
+<script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+<!-- iCheck -->
+<script src="../vendors/iCheck/icheck.min.js"></script>
+<!-- PNotify -->
+<script src="../vendors/pnotify/dist/pnotify.js"></script>
+<script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
+<!--<script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>-->
+<!-- Switchery -->
+<script src="../vendors/switchery/dist/switchery.min.js"></script>
+
+<!-- Custom Theme Scripts -->
+<script src="../build/js/custom.js"></script>
+
+<script type="text/javascript" src="/js/esSearch.js"></script>
+
+</body>
+</html>

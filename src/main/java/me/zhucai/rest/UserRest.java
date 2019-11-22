@@ -9,10 +9,9 @@ import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -40,6 +39,11 @@ public class UserRest {
         return id;
     }
 
+    @GetMapping("/preventTimeout")
+    public ResponseEntity preventTimeout() {
+        return ResponseEntity.ok().contentType(MediaType.TEXT_PLAIN).body("ok");
+    }
+
     @PostMapping()
     @RequestMapping("/test")
     public String createUserTest(@RequestBody JSONObject jsonObject) {
@@ -50,21 +54,21 @@ public class UserRest {
         userInfo.setSalt(jsonObject.getString("salt"));
         userInfo.setState(jsonObject.getString("state"));
         userInfo.setUid(UUID.randomUUID().toString().replaceAll("-", ""));
-        int i=userInfoMapper2.insert(userInfo);
+        int i = userInfoMapper2.insert(userInfo);
         System.out.println(i);
-        return "ok"+i;
+        return "ok" + i;
     }
 
     @PostMapping()
     @RequestMapping("/test1")
-    public String test1(@RequestBody JSONObject jsonObject){
-       return ""+userInfoMapper2.selectAll().size();
+    public String test1(@RequestBody JSONObject jsonObject) {
+        return "" + userInfoMapper2.selectAll().size();
     }
 
     @PostMapping()
     @RequestMapping("/test2")
-    public String test2(@RequestBody JSONObject jsonObject){
-        return ""+userInfoMapper2.selectById(jsonObject.getString("UID")).toString();
+    public String test2(@RequestBody JSONObject jsonObject) {
+        return "" + userInfoMapper2.selectById(jsonObject.getString("UID")).toString();
     }
 
     public static void main(String[] args) {

@@ -3,17 +3,17 @@
 <mapper namespace="me.zhucai.mapper.SysPermissionMapper">
     <select id="findPermissionByRoleId" resultType="me.zhucai.bean.SysPermission">
         SELECT
-            sys_role.id,
-            sys_role.available,
-            sys_role.description,
-            sys_role.role,
-            sys_permission.`name`,
-            sys_permission.permission,
-            sys_permission.url
+          sys_role.id,
+          sys_role.available,
+          sys_role.description,
+          sys_role.role,
+          sys_permission.name,
+          sys_permission.permission,
+          sys_permission.url
         FROM
-            (sys_permission, sys_role)
-        RIGHT JOIN sys_role_permission ON sys_permission.id = sys_role_permission.permission_id
-        AND sys_role_permission.role_id = sys_role.id
-        WHERE sys_role.id=#{roleId}
+          sys_permission sys_permission , sys_role sys_role , sys_role_permission sys_role_permission
+        WHERE
+          sys_role.id = sys_role_permission.role_id and sys_role_permission.permission_id = sys_permission.id
+          and sys_role.id = #{roleId}
     </select>
 </mapper>

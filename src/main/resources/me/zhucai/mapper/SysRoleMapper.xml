@@ -3,20 +3,20 @@
 <mapper namespace="me.zhucai.mapper.SysRoleMapper">
 
     <select id="findRoleByUsername" resultType="me.zhucai.bean.SysRole">
-          SELECT
-            user_info.uid,
-            user_info.`password`,
-            user_info.salt,
-            user_info.state,
-            user_info.username,
-            sys_role.id,
-            sys_role.available,
-            sys_role.description,
-            sys_role.role
+        SELECT
+          user_info.uid,
+          user_info.password,
+          user_info.salt,
+          user_info.state,
+          user_info.username,
+          sys_role.id,
+          sys_role.available,
+          sys_role.description,
+          sys_role.role
         FROM
-            user_info
-        RIGHT JOIN sys_user_role ON user_info.uid = sys_user_role.uid
-        LEFT JOIN sys_role ON sys_user_role.role_id = sys_role.id
-        WHERE username=#{username}
+          user_info user_info,sys_user_role sys_user_role,sys_role sys_role
+        WHERE
+          user_info.UID = sys_user_role.user_id and sys_user_role.role_id = sys_role.id
+          and user_info.username =  #{username}
     </select>
 </mapper>

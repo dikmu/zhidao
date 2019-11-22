@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>购物搜索</title>
+
+    <script th:inline="javascript">
+        var GlobalData = [[${GlobalData}]];
+        console.log(GlobalData);
+    </script>
+
+    <!-- Bootstrap -->
+    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- bootstrap-progressbar -->
+    <link href="../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <!-- PNotify -->
+    <link href="../vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+    <!-- Switchery -->
+    <link href="../vendors/switchery/dist/switchery.min.css" rel="stylesheet">
+    <!-- PNotify -->
+    <link href="../vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+    <!--<link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">-->
+    <!-- Custom Theme Style -->
+    <link href="../build/css/custom.min.css" rel="stylesheet">
+
+    <style>
+        .shopList {
+            margin: 30px auto 20px auto;
+        }
+
+        .shopList input {
+            margin-top: 10px;
+            width: 100px;
+        }
+
+        hr{
+            width:80%;
+        }
+    </style>
+
+</head>
+
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+
+        <div th:insert="~{common :: nav_menu_bar}"></div>
+
+        <!-- page content -->
+        <div class="right_col" role="main" style="min-height: 951px;text-align: center;">
+
+            <div style="margin-top:100px;">
+                <div style="font-size:3em"> 购物搜索 </div>
+                <input id="_in" type="text" class="form-control" style="width:50%;min-width:400px; margin:20px auto 20px auto" placeholder="输入商品名称"></input>
+                <hr>
+                <div class="shopList">
+                    知乎、什么值得买
+                    <br>
+                    <input type="button" onclick="search1()" value="搜索"></input>
+                </div>
+                <hr>
+                <div class="shopList">
+                    网易严选、小米有品、无印良品、凡客、聚美优品、网易考拉、唯品会、小红书
+                    <br><input type="button" onclick="search2()" value="搜索"></input>
+                </div>
+                <hr>
+                <div class="shopList">
+                    京东、天猫、淘宝、亚马逊、当当、拼多多
+                    <br><input type="button" onclick="search3()" value="搜索"></input>
+                </div>
+                <hr>
+                <div class="shopList">
+                    苏宁易购、国美、家乐福、1号店、宜家
+                    <br><input type="button" onclick="search4()" value="搜索"></input>
+                </div>
+                <hr>
+                <div class="shopList">
+                    美团、糯米
+                    <br><input type="button" onclick="search5()" value="搜索"></input>
+                </div>
+                <hr>
+                <div class="shopList">
+                    华为、Apple苹果、TCL、美的、格力、海信、海尔
+                    <br><input type="button" onclick="search6()" value="搜索"></input>
+                </div>
+
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+            <div class="pull-right">
+                Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+            </div>
+            <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+    </div>
+</div>
+
+
+<!-- jQuery -->
+<script src="../vendors/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<!-- FastClick -->
+<script src="../vendors/fastclick/lib/fastclick.js"></script>
+<!-- NProgress -->
+<script src="../vendors/nprogress/nprogress.js"></script>
+<!-- bootstrap-progressbar -->
+<script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+<!-- iCheck -->
+<script src="../vendors/iCheck/icheck.min.js"></script>
+<!-- PNotify -->
+<script src="../vendors/pnotify/dist/pnotify.js"></script>
+<script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
+<!--<script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>-->
+<!-- Switchery -->
+<script src="../vendors/switchery/dist/switchery.min.js"></script>
+<!-- Custom Theme Scripts -->
+<script src="../build/js/custom.js"></script>
+
+<script src="/js/buyThingsSearch.js"></script>
+
+
+</body>
+</html>

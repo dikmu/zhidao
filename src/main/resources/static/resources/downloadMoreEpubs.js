@@ -1,0 +1,47 @@
+8
+//12
+
+
+var bids = "0,J9NJDx1G1k33vI2RaGmgEUzhwG4i3RktMrpi8xcmO%2fsY83Vx4HxxTe%2bvIicOFt%2bzT%2fjo8ElPQtHMaasNgmnEbqH8COZnHzNTSP6iDvRekmgiZxb1PV1uGMUjx3KA3EHz,J9NJDx1G1k1BU%2fi7QbZQMNl4SYoKy8RkHrbg6EufT8rCwmbHQr5DDvZ5RgccugX7mC%2b3RnFtR0BAXchl7mSIC4eAQtCo6mAI2GUVK2%2fM1fhaII7NE%2bsEYFbEV7sp79yv,J9NJDx1G1k3Wa3IkNhALpMNQIVywCrP3qgfjX27gZNR2Po8F35S8xxlXhOQB46%2fQ5EKSk2rrjlL%2bB05v1hP6UEgMKyOj2u7gRdxPgdj9K6qD4hYkGXVuh72QHshmM%2byj,J9NJDx1G1k2WJzcNAoFWaxoZlXgmA6wG6rBNaAkX7yWr%2f3IAR2sy%2fOXYTVKbvqZBOUsHPRp7p%2bYcuO1%2fq%2bFq9YV%2brALyCdBzu9dzNUtf6L58EolGMU%2bROGSPxbh%2bS1cO,J9NJDx1G1k1EBreDh0i045bybTRrd6yYeYWaZ%2bSMuXWm4PrWigIB4fvS6o50SilqSEpZF49XpRRMdpb9IJ0oZKrA350oS3oq4FgzGUBi1gA5hBVRL1nlrJnVUEdOGwjv,J9NJDx1G1k0im6IFkBI0MUEBc7EUtc27GPnKhizrQgPqTAw7uwjNSf6NLNnYTjYac1YYUpkVi244e22bCPvDya%2fJWAwFpKwqKCTNB8eExASPrlrgxAPSNWbksceqBRfS,J9NJDx1G1k3HYYSUPz1rPHS4qQoBEUKuyB324hgltfLGfyYVxh%2fbCyZgs7qlDHLgD3Kzq55cGi5wNvMaX3tTbmu08mGwnTPPycCst4qlchyA06yoOoKwRQO%2fnKklMKZH,J9NJDx1G1k1Wus6F13Sn2q5rxdZSxwVrQ%2fPU0qGj4j6XCGMvEH9qeG6Dd%2f3ZPTucboI5Yhor5TYc8uprsUb7bBNruzG6PbMikQSwPoefAuvXAGCIyECPYm8eiJeYFiAx,J9NJDx1G1k18EKYP1EA3HKMeUnwbVxTn16bjC3Sk%2f5%2biIar2Wd2ukL3FL8xm0incWywLhx6%2fs5FZ6AnUfwPqj3fsYzI2tt9VN%2btNPt55KsQL9l36SHBDlJWPskqhsfiI,J9NJDx1G1k0tbWBuYizVmpwxItMM%2fj3oARbcF2bzJmCkHohX1rPjJjUy5d%2bNYkfuT1dd6%2bXpo4JQANUPJaKMmPeP4EWl7KHAvRlRZ5eSa%2fV5puOYrc3jB6AUTJewH6zL,J9NJDx1G1k0ABHEJEmmLxo%2fSREX47CaBNBRo0cJHBmBd5zL0KeYcZLIQhGYHLiNI%2fhKu7t1UGQHhJtPoVdQXdk5N0YAJayO5nfvTfWXY9yeSzDhBmS%2bSsbuRM9EH55KH,J9NJDx1G1k0TtdJsgQp%2fLlzWt8Aj6tk40XmeoF0nJPrqzrbe1KL7NnlWl7oQbs1VrnycWqzS%2bNv5v9UDe5yGKE2e3FoM0A36jaeppzv1Iyb%2bah8onr%2f%2fAjEUoyUnJKqv,J9NJDx1G1k3p2zksRjCvCG8DAYd3L1aqfgQt13Oi%2fzMJC0Jez5I9p3Hd1t2Uvo1KRM0nQ7DnA5dCVjw99BrOFrKy9RINRyR8vV9wFbRVXem%2bEzXqL9X0rokRKU1EBxHR,J9NJDx1G1k0ptVz5KLbuh6sIPllpekYuzsYw3FqPxOA6yptezdQMkjFxQJekUyG88OE%2fXlL3ZGE%2fVf3DototsEuhFTaQdoNqwXzAdsavA2O1HfnWRB4JTN9TG9Wtp2L3,J9NJDx1G1k2nXMgIZLo6zZfDk2P45oAhvMy%2bimhniRU0K9fqxNH940rArnuoFzVACoWo9HtcRP3Pkm%2bhu6%2feSfKi5dEqlGEZtn0DsU5MyxXG%2f0JRGwsovfm%2bg%2bdyekIA,J9NJDx1G1k0XbiQrZ5cVTa4r0BooBREtbpO7wDFXMEYRM25ajOB8MStehu1GK%2bDkoPfUP4x1TIa8t9YvwUV53XNxd9hlEyqDdZfJce6oMtg2iEsy8xxXvQVPK7VxsAIq,J9NJDx1G1k2gpToh60XiQFLk4xeMRp1CvZcoMQFCIzIjDuYeioli8XZhy7FrcjgeKNYYLkVegRFub1Z%2b%2f9JWYDUwpY8Dt7i37RxhkV3ZJ5eG0z0UEHCGH%2bAK4td5YQFZ,J9NJDx1G1k0VEYQRxBAkFR1%2bA0kL7y3j4W9l5v7BOX03GzF4Mmg2ODn0VqM69bHR2nUmjxhBUFURqAaLS76csN8gwTGBKUUledcDOuoG7Bz9Z7Nd2Op6yO2zKKHrKqEY,J9NJDx1G1k2diSVZWzQwkGs0YeqVtxRDhgLuYQmJk391iHUBOUBoR13FTxWwwpAAO13%2bwIQircHJtZGu2nJR5nTERGW0Svij6qoyf4qVjCy%2beyF4Z6WPQtTlhMD30dn6,J9NJDx1G1k3ROFVfcYYyMePvtkfZhfcJkKeAtq4R4SWc4G5sBQue0UVKHqTacMjk7hfQjOkSaZaHbMmPjaguGD7OJz1k4QBxsL2xHOEsjs3aR1lXVE3tPkLk8P8uYscv,J9NJDx1G1k1D9I5RxuBrVfP33VI4RF3x3wU62dKmxTOtz6gQPsJiKh9iFnH40gZHcP93W0Co6tu7i1jWnNUSDnJ%2fjj2hc5veYXTIoCHbRAyx58Rctikkjvy07TSqWs%2fu,J9NJDx1G1k1xhyXQGT3TL%2bSy8m7V3e9%2f3z0PKPMbC255kaETiw1ZicakyRIx3tj1Le96hs2uXx%2b3QEyBzKIl%2fKKB1zJJriEs4uDHP%2fhwCW%2bQFUj2c%2fJRkbWlPbOLUdC4,J9NJDx1G1k2%2f1Tk9%2fAz7C%2fE58XqF9wn3jQRvVjPrxnZor9dAn3giURuOFY3xHugD7hGj12JInT8lXesRJhE7c3HzdxDL1nnVXMjOBzGMVgeYA6lR%2bhBqbvNmJ3szYLD9,J9NJDx1G1k3%2f%2bfTSwHGqU5kclhtHHz0ZICEmytyI4lj3cs8Gl%2feNydBTQgRjQN%2fnGSoxw3JVu7AHJi25q6GtCmJgMdwTXUdoC4tgSbeVDLOSEx%2bQYwepuNRWb1OvgfmY,J9NJDx1G1k2QDoF%2fuer1psLjgBeyaEtyhBWtWoIW%2bjRGKTxbjVJW35C378vWEj5Cu%2biSKKPFuKttBTnZ86qDhM8vq7A0c3YtHDBTdEDYFb6Km85aDX9NQ908PpcZNNUi,J9NJDx1G1k0UQ%2fCmFbmVEd8xgE6UDTGLwBxNeunuHBieBMkzRUlEn96%2fJvIE8t7Nzo82oQAWXDAtYwrfpqQyqKOc3qHtFB3sGE9DgDIbCZeKlYki7Z2tFXISSyEVT1ZW,J9NJDx1G1k3aBvxX18VAmI8Mvsauvj3KBdAJ3%2bcNlwLENIIrxwmQ%2fED04qQXa9ceAi0zL0vZZOvnBjzUnmDjmdOXYB8WTipKGS2youceNHtuwxIZhy6CP0Z9kw6petc3,J9NJDx1G1k0%2bMccQphay7EixsmtZmBlK4IrAXaM69qtgG8fYt6CCXYenydJpsjHDRpTfhjhBcgVFA6jR%2fUS%2b7jvkOOodb6VKrC%2b6fE10aA1bRZbc6pfb4jtg%2bBe%2fV4SD,J9NJDx1G1k0iKfb3YGjtrufJYjqQ6Dcu4VJZXy0wpc8MqmOtRbpv86BvEMu1esn5HAH8w9GyVW9TGlHgLFgdj6FRcgACaq9NDCC59y%2fSSoSvoKjmp81TBKLEdLyTF5iS,J9NJDx1G1k2QQjKmj8%2fFT480ZQeohH2iE1%2bq34tGZGZvjpRZDieKgesC%2feTcRWy8f%2fLH0DILTSj%2f90dGqqYnOvhDWaEbMO%2bKb8nkD7CSmLuhP7rtD4XbHPZUM9uelj5q,eeCes9Fpkc7gPdvRzwKGFEba67xCYIdZiczuKDQeVOve8fLPI48V4hOQrqdIrmDLxsnCZ5Knmm%2bvQesdyhH363sYw8DkifWYApLO%2f%2b66YiQvf6FMmXBJjS8vKBGiEozc,eeCes9Fpkc69wIYfEKknJZ4BX23HupXGXqyFrjboXE8vueJ8UgFi9vt2NpN0rwXqjt2WGQb2GCApas8qA3sPp1VjM%2bOxXWQklmM%2b37m8m9XeGpnPmQp6QhnTBrQ2HxDO,eeCes9Fpkc4a75pyR4yfG1tOyEXnJIMyd6C%2bLWph72rtb91KyLgiRMi4kcO0CNluH4RrCkAalG0NAIrA6ys2MEnp55yUaSllmpOBhLuG2Inq8k8doiMRq2yuIC2y1qHZ,eeCes9Fpkc4UDxLAfVKmAIIrh5To5bBCQ4myPAhXpDmzmHJ%2bF%2f1iBLG2hHsQ5MQlZQ7Wh74wYdbymCIXxg6X2yl17NBl1ehkds81BycZyJG95%2fSw4dmwcyiWgjQJwaE0,eeCes9Fpkc7n0qlGQ5zLPG57p45SubXw58pX8ArmlXnlwlNORByT929y5FCCRrTIrYhoaYLWhasVl0Ueg5hnpY8Ze01YugQoJYZ9KRu0HQNt3HTIEqf1XIdLCmNPTpIE,eeCes9Fpkc5GgV5BwbmehIhAtkF5sFPdLOD%2baWYtGLromlmN%2bLUbMAQ%2bhFLgwepT7kgCgQibACOgPhuFQK%2fDBEL68dBIjALC3oog3lX7vktOOYFP21qGQqStd5GdfgWq,eeCes9Fpkc6b4oOgDbEmeEd0%2fCsUROlEkKTPNynSbDGpmMW5tIUU7wUj%2fq97%2fwtUeHwQycj7sCrX0Y9w9qTfFVFd3LEY%2b7cE6QpA%2fZWLyHWoxaSLOJ2oG7oj0Fpo8EdT,eeCes9Fpkc7pNroZEy8jDJMCxMUU%2bGcJilzS9UwQAZJtn3XMzxlouPImHM2YFkcuhT%2fU3WkgWqnCGaNYKBXOyYeQzlpSYfh9VTk00lXHebQhXTFUovc%2bIpj3kXRuVEMz,eeCes9Fpkc4mQzAc3FtQSlUAIBKFvG6TflonRQdSecYhRxWuk47P3PSEx3ZWSmllQ%2be8xYCJU5AuQZWSrghlwevJvBlRXFuTDmtfS5fo4MwloXtYfqddQFLq2GJh83a4,eeCes9Fpkc4n45B2XQlzgLPRphcs%2bDjuvBAr8do5FrSoE1sGj8pItlLyiSF5FFsW9f6OSnUf4U64Bo7C%2fRKr19Dufb%2bWYqvj6AV%2fBO%2fiBROLJvDlOXXwwjyx3gw7pxoA,eeCes9Fpkc5%2bdEvKuQnfAB3kTcgcdC0KmesTs96lmm0PqFYjLEMR52%2fpEckz%2fbQy8eSVoJshSVm6GTj9jmK17fgnDS2IJYO4A%2b8Ld4PkEtyoeo%2fSxvkurMMfA%2bBInKnG,eeCes9Fpkc4ORab99bv4tByuXPqDOzM%2b%2fTYU8OFhvYO93lTG0tNLsf7onJpp40LyguxGzY%2fp7T6nTplUO4J11l9JUazEtEYbBa5D%2feYc7EK19kdbbcNbDgiRssyevbAl,eeCes9Fpkc42p9360HT2weiJpPFg0woIVsvE8k12sHaoetyC4mfEB9hrCCfg0LHxXXitql%2bz4vyRbJ886H1qMEMTy%2flRobOPZZFSeZShkjyh4n4dn%2fd76kT6MzRi3xn5,eeCes9Fpkc5Vy%2fAdcy7yLvNPSsoomnQs0X4kwZ2m9jcxwxH6sInYtVWzEA2vSBsCmHZehdPUEKlEOPoEVMkKqOR0OCmsv5X9PqVatHH62yEcw5uF%2fN7nDhPxFD6mBuZI,eeCes9Fpkc55K%2fFX67Vbt3nKdvXs%2fFMqLvesfd8vByaGawh8iQNwK0i7%2bpFoyWx%2bSKE0gSkT9eIwSRx%2fidjbTMdfH43sSudw8%2fWeaFq33qGNI3AdTkdqIaA6Kh2lIZ5K,eeCes9Fpkc7XLgkkACrLKanV1wNCWLdIdmp4eKaNA39IGQTFbJLpKo7JkmFW26OGmUVIUxs%2boyeGzUh1BIBHuooSaL34IWp%2fdyx3CNCAUCaGWRpsV%2fk7vjjBc%2f0nKbwb,eeCes9Fpkc4b4D0XdhrnZ%2bzQ5WHZ30yPghXsRXPCjbKKUOMsJUp3%2buInRwLMOKFeYVnU0wyAItop%2bIqJPI%2f7aOKE%2fEboB%2blRbTxm%2b6zcsTucYGWWrncc7yLg7Ij6xggu,eeCes9Fpkc763DzSIyfdmS%2bLTJCao0ZLc6mUvEQPRlcBzR7ucPzaej9ojO61XuWCWJHen5cB75yrPbvE8I%2fTriXYNpAI3cK53z5yKlyNbzCSL0dlsGvOzJbg7jKX7WqH,eeCes9Fpkc7EgMNVIXkMF%2fa0WjjLiWViQzg4P9evxt7444zfXrDq%2fVyNY4B%2btLL1a%2bwntlWyB1F7g9UlfXNKyzBchn4S5l10lJ%2fO7B1swsYlQVIdfG2nzItm28c91vpp,eeCes9Fpkc63fTf%2b6AqBaPl0IMOrSZXW%2b86gVqaptK55frVeFZvJOySXNlh1%2bKFAYqO983%2fkoD40XjgFYts2GPIfkYjp%2fshUh2qT1kJfem9ikSJwvZlFrAvn%2fI5TqAY8,eeCes9Fpkc4tV2tz2uU9FGRo9KG4R1rtSBkz8WYXix7jV%2fBHYR8nTWb0h9bAcY29MKFVbU7CJaI48E84QQS5kZgoyMcOjcoEKgM%2fqZSYp2TbepYrpEQGoAQej5MMbzUM,eeCes9Fpkc7xd%2bVvt3wnc1sAVfpf0HFZ8I9gGoVWtYMG5SAHq6RVd1WlIx9K9MyMdY%2fUZ%2fSIgBwdK9n70OZzCBlTcGr41pSy6Azkg8jvBDHMgLfQTBmA1ZIxYKsqTzsW,eeCes9Fpkc7JnGspQua6IRjXaDNLaEgslZCNGr4TwjxY1vtIQ%2fCi5LMiQ3%2bhnHmn2yM6pCm5%2bpyIRflN1iZJNmSxvTLJLgBc462whCZkfEacnpQicw8ScdhQnESn9rmX,eeCes9Fpkc7GJjJFj1aQyhyHtu5%2b2bGkOKzxgVL7ATFCYGIPgwgnB3%2fuzJP9paJvUvElsH5A5%2blqOK46w7PBA1cW4QEI7p8M9qH3oAbs9MruH4SUqxDtCRZZaIiaoEFm,eeCes9Fpkc5wwJTqWDRnDAER%2fHKa5%2f4GV3SFZ5Y%2fh3FuQ%2b46Yu3tQN0U%2bbdM9d%2bAyivE2Ts%2b%2bIPmvXH6xB%2foBLsMyOgzey8yAUEIT07u%2fKIMfXTKQMe%2fci%2bfJ1TBng7l,eeCes9Fpkc6s6nBS2jaUkj5mB%2fOORkdOJ6piTAk%2fjTQpgwIDpN5dYgI4zwMplQstzXNCU885SR%2bcOgCnc2%2fEQ%2fxSE6zHzsN3UzVVT%2fIAQGIzIcGvgqRQwKgcfuf3H9AT,eeCes9Fpkc5VhsZ%2fcQJcLs%2bbDWV%2fbJt5M5mTGl5hSF1vfq%2beqgnbNUMQ329GXclaeuqY5vBtpSE4nQYYOHs8qas8CHcUjRwXni4PJdKesfKuKAMhiScOwN9llQKyUDAC,eeCes9Fpkc6U%2bd4aQZdsjKXvgIpdZWzbV2iKdlCOyOu1lRMt%2fmXU7fK1uK4NKNkduo11TJo%2f1FemFd6smwr8EOlU5TmjLMBcdMm3hjZmTDXFOKZoPzyS0mIhhpeNWKKZ,eeCes9Fpkc7msHkqODEXcQSSXZaJ91OBuelCYsQbPvYh5dkkOgq42ov2ruAJc2uurNZlcYQkg5dzEjRYWvXzfLK3iN6XFjltLjDaSJ1K64%2f90aoPYM1KGsQAQccVsRnI,eeCes9Fpkc4c4VEFmFzjzrGNIkkZsLHMYOwDQXOHhj1dCaWwMoIaPcDiBeiJ4DrE21cZW4zoNZmRInRlolX6%2fP4ssA8a%2fRv1AU9B99VQRJUddCogqK6KeWQWZ07Lw5TA"
+
+setTimeout(function(){
+
+ if (isVip == "1") {
+        $(".loading").show();
+        $(".loading").html(_ts("processing") + "...");
+        $.ajax({
+            type: "post",
+            contentType: "application/json",
+            url: "app_books/compressFiles.asmx/compressFiles",
+            data: "{uid:" + uid + ",bids:'" + bids + "'}",
+            dataType: "json",
+            success: function(result) {
+                $.each(result.d,
+                function(index, data) {
+                    if (data.indexOf("getFile.ashx") > 0) {
+                        popalert(_ts('succeed'));
+                        top.location.href = '\/\/files.epubee.com' + data;
+                    } else {
+                        popalert(data);
+                    }
+                });
+            },
+            error: function() {
+                popalert(_ts('systemerror'));
+            }
+        });
+    } else {
+        popalert(_ts('justforvip'));
+    }
+
+},1*1000);
+
+<!--
+
+         var bids = '0';
+            $(".book_child input[type='checkbox']").parent().parent().find(".bid").each(function() {
+                bids += ',' + $(this).text().replace("'", "");
+            });
+    bids
+
+-->

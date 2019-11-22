@@ -96,7 +96,7 @@ public class LocalEpubWordCountRest {
 	}
 
 
-	public long wordCountBook(String path, String word) throws FileNotFoundException {
+	public int wordCountBook(String path, String word) throws FileNotFoundException {
 		File file = new File(path + ".txt");
 		if (!file.exists()) {
 			System.err.println("File Removed:"+path+".txt");
@@ -118,7 +118,7 @@ public class LocalEpubWordCountRest {
 			 */
 			word = word.replaceAll("\\+", " ");
 			String[] ss = word.split(" ");
-			long mark = 1;
+			int mark = 1;
 			for (String s : ss) {
 				if (content.indexOf(s) != -1) {
 					mark = mark * content.split(word).length;

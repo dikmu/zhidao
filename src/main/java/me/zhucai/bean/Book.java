@@ -1,10 +1,14 @@
 package me.zhucai.bean;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Book implements Comparable<Book> {
 
     String uuid;
@@ -16,7 +20,11 @@ public class Book implements Comparable<Book> {
     String creator;
     String language;
     String description;
-    Long wordCount;
+    Integer wordCount;
+
+//    public Book(String uuid,String title,String ){
+//
+//    }
 
 
 //    @Override

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="me.zhucai.mapper.AllStudyDocMapper">
+
+    <select id="queryAll" resultType="me.zhucai.bean.AllStudyDoc">
+        SELECT
+          uuid, filename, filepath, content, info
+        FROM
+          all_study_doc
+        ORDER BY
+          filepath,filename
+    </select>
+
+    <insert id="insert" parameterType="me.zhucai.bean.AllStudyDoc">
+        INSERT INTO all_study_doc
+            ( uuid, filename, filepath, content, info)
+        VALUES
+            (
+            #{uuid},
+            #{filename},
+            #{filepath},
+            #{content},
+            #{info}
+            )
+    </insert>
+
+    <update id="updateInfoContent" parameterType="me.zhucai.bean.AllStudyDoc">
+          UPDATE all_study_doc
+          SET content=#{content}, info=#{info}
+          WHERE uuid=#{uuid};
+    </update>
+
+</mapper>

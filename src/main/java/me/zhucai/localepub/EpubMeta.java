@@ -73,6 +73,10 @@ public class EpubMeta {
         return creators;
     }
 
+    public String getCreatorsTxt() {
+        return creators.toString();
+    }
+
     public void setCreators(List<String> creators) {
         this.creators = creators;
     }
