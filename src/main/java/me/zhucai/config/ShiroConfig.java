@@ -28,12 +28,14 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         filterChainDefinitionMap.put("/logout", "logout");
-        filterChainDefinitionMap.put("/pages/**", "user");//pages for all logined user
+        filterChainDefinitionMap.put("/pages/index", "anon");//pages for all logined user
+        filterChainDefinitionMap.put("/pages/BuyThingsSearch", "anon");//pages for all logined user
+        filterChainDefinitionMap.put("/pages/BookEsSearch", "anon");//pages for all logined user
+        filterChainDefinitionMap.put("/pages/BookDbSearch", "user");//pages for all logined user
         filterChainDefinitionMap.put("/epubee/**", "anon");//for epubee network
         filterChainDefinitionMap.put("/res/**", "anon");//js images html
         filterChainDefinitionMap.put("/resources/**", "user");
         filterChainDefinitionMap.put("/rest/**", "user");
-        filterChainDefinitionMap.put("/welcome", "anon");//for anymouse user
         //authc表示需要验证身份才能访问，还有一些比如anon表示不需要验证身份就能访问等。
         shiroFilterFactoryBean.setLoginUrl("/login");
         shiroFilterFactoryBean.setSuccessUrl("/pages/index");

@@ -2,10 +2,8 @@ package me.zhucai.controller;
 
 import me.zhucai.bean.UserInfo;
 import me.zhucai.service.BusinessData;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
-import org.apache.shiro.web.util.WebUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,25 +32,26 @@ public class PageDirectController {
     public static final String PAGE_ID_BUY_THINGS_SEARCH = "BuyThingsSearch";
     public static String[] AUTO_DIRECT_PAGES;
 
-    static {
-        AUTO_DIRECT_PAGES = new String[]{PAGE_ROOT + PAGE_ID_BOOK_ES_SEARCH, PAGE_ROOT + PAGE_ID_BUY_THINGS_SEARCH};
-    }
+//    static {
+//        AUTO_DIRECT_PAGES = new String[]{PAGE_ROOT + PAGE_ID_BOOK_ES_SEARCH, PAGE_ROOT + PAGE_ID_BUY_THINGS_SEARCH};
+//    }
 
+    /**
+     * default page
+     *
+     * @param model
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
     @GetMapping(value = "/")
     public String welcome(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        setCommonMenuNavData(model);
-        Subject subject = SecurityUtils.getSubject();
-        if (subject.isRemembered() || subject.isAuthenticated()) {
-            response.sendRedirect("/pages/index");
-            return null;//never run this
-        } else {
-            response.sendRedirect("/welcome.html");
-        }
-        return null;
+        return index(model, request, response);
     }
 
     /**
-     * 默认页面
+     * login
      *
      * @param model
      * @param request
@@ -61,23 +60,23 @@ public class PageDirectController {
      * @throws IOException
      */
     @GetMapping(value = "/login")
-    public String index0(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public String login(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException {
         setCommonMenuNavData(model);
-        String url = WebUtils.getSavedRequest(request).getRequestUrl();
+//        String url = WebUtils.getSavedRequest(request).getRequestUrl();
         return "/login";
     }
 
     @GetMapping(value = "/pages/index")
     public String index(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException {
         setCommonMenuNavData(model);
-        if (WebUtils.getSavedRequest(request) != null) {
-            String url = WebUtils.getSavedRequest(request).getRequestUrl();
-            System.out.println("WebUtils.getSavedRequest(request).getRequestUrl()");
-            System.out.println(url);
-            if (StringUtils.isNotBlank(url) && !"/pages/index".equals(url)) {
-                response.sendRedirect("/"+url);
-            }
-        }
+//        if (WebUtils.getSavedRequest(request) != null) {
+//            String url = WebUtils.getSavedRequest(request).getRequestUrl();
+//            System.out.println("WebUtils.getSavedRequest(request).getRequestUrl()");
+//            System.out.println(url);
+//            if (StringUtils.isNotBlank(url) && !"/pages/index".equals(url)) {
+//                response.sendRedirect("/" + url);
+//            }
+//        }
         return "/pages/index";
     }
 
@@ -135,13 +134,24 @@ public class PageDirectController {
 
     private void setCommonMenuNavData(Model model) {
         Subject subject = SecurityUtils.getSubject();
+        if (subject == null || subject.getPrincipal() == null) {
+            model.addAttribute("logined", "N");
+            model.addAttribute("menus", BusinessData.getSysMenus());
+            return;
+        }
         UserInfo userInfo = (UserInfo) subject.getPrincipal();
-        if (userInfo != null) {
-            model.addAttribute("username", userInfo.getUsername());
-            model.addAttribute("menus", BusinessData.getSysMenus());
-        } else {
-            model.addAttribute("username", "未登录");
-            model.addAttribute("menus", BusinessData.getSysMenus());
+        model.addAttribute("logined", "Y");
+        model.addAttribute("username", userInfo.getUsername());
+        model.addAttribute("menus", BusinessData.getSysMenus());
+        if (subject.hasRole("admin")) {
+            model.addAttribute("role", "admin");
+            model.addAttribute("roleName", "管理员");
+        } else if (subject.hasRole("vip")) {
+            model.addAttribute("role", "vip");
+            model.addAttribute("roleName", "VIP");
+        } else if (subject.hasRole("guest")) {
+            model.addAttribute("role", "guest");
+            model.addAttribute("roleName", "访客");
         }
     }
 
