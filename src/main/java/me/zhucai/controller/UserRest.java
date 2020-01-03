@@ -1,4 +1,4 @@
-package me.zhucai.rest;
+package me.zhucai.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import me.zhucai.bean.UserInfo;

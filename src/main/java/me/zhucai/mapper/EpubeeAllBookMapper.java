@@ -22,9 +22,11 @@ public interface EpubeeAllBookMapper {
 
     /**
      * 改变日期，获取下一批待下载书籍
+     * 2019-07-20及之前，已完成下载
+     *
      * @return
      */
-    @Select("select * from epubee_all_book where downloaded = false and added_date >= '2019-07-05' and added_date <= '2019-07-20' order by name")
+    @Select("select * from epubee_all_book where downloaded = false and added_date >= '2019-12-01' and added_date <= '2019-12-28' order by name")
     List<EpubeeAllBook> queryUndownloadedBooks();
 
 }

@@ -8,13 +8,10 @@ import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.SimpleCookie;
-import org.apache.shiro.web.util.WebUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 
-import javax.servlet.http.HttpServletRequest;
-import java.security.MessageDigest;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -31,13 +28,15 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         filterChainDefinitionMap.put("/logout", "logout");
-        filterChainDefinitionMap.put("/pages/**", "user");
-        filterChainDefinitionMap.put("/epubee/**", "anon");
-        filterChainDefinitionMap.put("/", "anon");
+        filterChainDefinitionMap.put("/pages/**", "user");//pages for all logined user
+        filterChainDefinitionMap.put("/epubee/**", "anon");//for epubee network
+        filterChainDefinitionMap.put("/res/**", "anon");//js images html
+        filterChainDefinitionMap.put("/resources/**", "user");
         filterChainDefinitionMap.put("/rest/**", "user");
+        filterChainDefinitionMap.put("/welcome", "anon");//for anymouse user
         //authc表示需要验证身份才能访问，还有一些比如anon表示不需要验证身份就能访问等。
         shiroFilterFactoryBean.setLoginUrl("/login");
-        shiroFilterFactoryBean.setSuccessUrl("/index");
+        shiroFilterFactoryBean.setSuccessUrl("/pages/index");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
     }
@@ -69,18 +68,21 @@ public class ShiroConfig {
         hashedCredentialsMatcher.setStoredCredentialsHexEncoded(false);
         return hashedCredentialsMatcher;
     }
+
     /**
-     *  开启shiro aop注解支持.
-     *  使用代理方式;所以需要开启代码支持;
+     * 开启shiro aop注解支持.
+     * 使用代理方式;所以需要开启代码支持;
+     *
      * @param securityManager
      * @return
      */
     @Bean
-    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager){
+    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager) {
         AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
         authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
         return authorizationAttributeSourceAdvisor;
     }
+
     @Bean
     public SimpleMappingExceptionResolver resolver() {
         SimpleMappingExceptionResolver resolver = new SimpleMappingExceptionResolver();
@@ -89,6 +91,7 @@ public class ShiroConfig {
         resolver.setExceptionMappings(properties);
         return resolver;
     }
+
     @Bean
     public EhCacheManager ehCacheManager() {
         System.out.println("ShiroConfiguration.getEhCacheManager()");
@@ -96,6 +99,7 @@ public class ShiroConfig {
         ehCacheManager.setCacheManagerConfigFile("classpath:ehcache-shiro.xml");
         return ehCacheManager;
     }
+
     //cookie对象;
     @Bean
     public SimpleCookie rememberMeCookie() {

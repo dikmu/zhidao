@@ -4,10 +4,9 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import me.zhucai.bean.UserEvent;
 import me.zhucai.bean.UserInfo;
+import me.zhucai.config.UserEventOpt;
 import me.zhucai.mapper.UserEventMapper;
 import me.zhucai.service.UserEventService;
-import me.zhucai.service.impl.SecurityServiceImpl;
-import me.zhucai.util.Lookup;
 import me.zhucai.util.ResponseUtil;
 import me.zhucai.util.SecurityConfig;
 import org.apache.commons.lang3.StringUtils;
@@ -17,6 +16,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -49,6 +49,9 @@ public class BookEsSearchController {
     @Autowired
     UserEventMapper userEventMapper;
 
+    @Value("${address.es.epub}")
+    private String EsEpubAddress;
+
 //    @Autowired
 //    private StringRedisTemplate stringRedisTemplate;
 
@@ -78,6 +81,13 @@ public class BookEsSearchController {
     }
 
 
+    /**
+     * page BookEsSearch's search method
+     *
+     * @param request
+     * @param paramJson
+     * @return
+     */
     @RequiresAuthentication
     @PostMapping("/book/es/search")
     public ResponseEntity bookEsSearch(HttpServletRequest request, @RequestBody JSONObject paramJson) {
@@ -85,10 +95,7 @@ public class BookEsSearchController {
         //验证权限及使用次数限制
         Subject subject = SecurityUtils.getSubject();
         UserInfo userInfo = (UserInfo) subject.getPrincipal();
-        //忽略3秒内的重复操作
-//        if (SecurityServiceImpl.userOperationTooFast()) {
-//            return ResponseUtil.userOperateTooFast();
-//        }
+
         //参数合法性判断
         if (!checkInputParams(paramJson)) {
             return ResponseUtil.inputParamError();
@@ -107,7 +114,7 @@ public class BookEsSearchController {
         Set<String> currentDaySearch = new HashSet<>();
         if (!subject.hasRole("admin")) {
             String userId = userInfo.getUid();
-            List<UserEvent> userEvents = UserEventService.queryUserDailyEvent(userId);
+            List<UserEvent> userEvents = UserEventService.userDailyEsSearchEvent(userId);
             //当日搜索内容
             for (UserEvent userEvent : userEvents) {
                 currentDaySearch.add(userEvent.getOptHow());
@@ -144,14 +151,14 @@ public class BookEsSearchController {
         HttpEntity<JSONObject> esRequest = new HttpEntity<>(jsonObject);
         //转发到 local ES url : http://localhost:9200/store/epub/_search
         try {
-            ResponseEntity responseEntity = restTemplate.postForEntity("http://localhost:9200/store/epub/_search", esRequest, String.class);
+            ResponseEntity responseEntity = restTemplate.postForEntity(EsEpubAddress, esRequest, String.class);
             if (responseEntity.getStatusCode().value() == 200) {
                 //记录操作
                 try {
                     if (!currentDaySearch.contains(optHowJson)) {
                         UserEvent userEvent = new UserEvent();
                         userEvent.setUserId(userInfo.getUid());
-                        userEvent.setOpt(Lookup.USER_EVENT_OPT_ES_SEARCH);
+                        userEvent.setOpt(UserEventOpt.ES_SEARCH);
                         userEvent.setOptHow(optHowJson);
                         userEvent.setOptPlace(request.getRemoteAddr());
                         userEvent.setOptTime(new Date());
@@ -162,16 +169,17 @@ public class BookEsSearchController {
                 } catch (Exception e) {
                     e.printStackTrace();
                     logger.error(e.getMessage());
-                    logger.error("记录用户操作异常");
+                    logger.error("记录用户操作异常 (错误173)");
+                    return ResponseEntity.status(500).body("模糊查询服务异常，管理员正在处理，请稍候再试 (错误173)");
                 }
                 //
                 return responseEntity;
             } else {
                 logger.error("redirect to ES error");
-                logger.error("模糊查询服务异常，管理员正在处理，请稍候再试");
+                logger.error("模糊查询服务异常，管理员正在处理，请稍候再试（错误182）");
                 logger.error(template);
                 logger.error(responseEntity);
-                return ResponseEntity.status(500).body("模糊查询服务异常，管理员正在处理，请稍候再试");
+                return ResponseEntity.status(500).body("模糊查询服务异常，管理员正在处理，请稍候再试 （错误182）");
             }
         } catch (Exception e) {
             logger.error(e.getMessage());
@@ -180,16 +188,25 @@ public class BookEsSearchController {
         return ResponseEntity.status(500).body("服务繁忙，请稍候再试");
     }
 
+    /**
+     * 热词搜索
+     *
+     * @return {
+     * 1：登录人，最近查询词汇
+     * 2：全部最近查询词汇
+     * }
+     */
     @RequiresAuthentication
     @GetMapping("/book/es/hot")
     public ResponseEntity userHotSearch() {
         Subject subject = SecurityUtils.getSubject();
         UserInfo userInfo = (UserInfo) subject.getPrincipal();
         String curDateStartStr = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-        List<UserEvent> userEvents = userEventMapper.userRecentSearchHistory(userInfo.getUid(), Lookup.USER_EVENT_OPT_ES_SEARCH);
-        List<UserEvent> userEvents2 = userEventMapper.userHotSearch(userInfo.getUid(), Lookup.USER_EVENT_OPT_ES_SEARCH);
+        List<UserEvent> userEvents = userEventMapper.userRecentSearchHistory(userInfo.getUid(), UserEventOpt.ES_SEARCH);
+        List<UserEvent> userEvents2 = userEventMapper.userHotSearch(userInfo.getUid(), UserEventOpt.ES_SEARCH);
         JSONObject result = new JSONObject();
         JSONArray arr1 = new JSONArray();
+        //todo 改为ES存储查询
         for (UserEvent userEvent : userEvents) {
             if (arr1.indexOf(userEvent.getOptHow()) == -1) {
                 arr1.add(userEvent.getOptHow());

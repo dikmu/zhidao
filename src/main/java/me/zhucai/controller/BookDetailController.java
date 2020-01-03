@@ -2,9 +2,14 @@ package me.zhucai.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import me.zhucai.bean.Book;
+import me.zhucai.bean.UserEvent;
 import me.zhucai.bean.UserInfo;
+import me.zhucai.config.UserEventOpt;
 import me.zhucai.exception.MyFileNotFoundException;
 import me.zhucai.mapper.BookMapper;
+import me.zhucai.mapper.UserEventMapper;
+import me.zhucai.service.UserEventService;
+import me.zhucai.util.SecurityConfig;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -25,6 +30,8 @@ import java.net.MalformedURLException;
 import java.net.URLEncoder;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping("/rest")
@@ -35,15 +42,53 @@ public class BookDetailController {
     @Autowired
     public BookMapper bookMapper;
 
+    @Autowired
+    UserEventService userEventService;
+
+    @Autowired
+    UserEventMapper userEventMapper;
+
     /**
-     * 下载电子书
-     * http://localhost:8081/downloadBook/873b29547b2b47d7bce9a572121c7303
+     * From EsBookSearch download epub
+     *
+     * @example: http://localhost:8081/downloadBook/873b29547b2b47d7bce9a572121c7303
      */
     @GetMapping("/downloadBook/{uuid}")
-    public ResponseEntity<Resource> downloadFile(@PathVariable String uuid, HttpServletRequest request) throws UnsupportedEncodingException {
+    public ResponseEntity downloadFile(@PathVariable String uuid, HttpServletRequest request) throws UnsupportedEncodingException {
         //验证下载次数超限
         Subject subject = SecurityUtils.getSubject();
+        if (!subject.isAuthenticated() && !subject.isRemembered()) {
+            //用户未登录
+            return ResponseEntity.ok().body("未登录用户无法下载");
+        }
         UserInfo userInfo = (UserInfo) subject.getPrincipal();
+        //
+        if (!subject.hasRole("admin")) {
+            String userId = userInfo.getUid();
+            List<UserEvent> userEvents = userEventService.userDailyEpubDownloadEvent(userInfo.getUid(), uuid);
+            if (subject.hasRole("vip")) {
+                if (userEvents.size() >= SecurityConfig.USER_EVENT_OPT_EPUB_DOWNLOAD_TIMES_VIP) {
+                    logger.info(userId + "(vip) exceded max download times");
+                    return ResponseEntity.status(403).body("超过VIP账号每日可下载次数（" + SecurityConfig.USER_EVENT_OPT_EPUB_DOWNLOAD_TIMES_VIP + "次），请明日继续");
+                }
+            } else {
+                if (userEvents.size() >= SecurityConfig.USER_EVENT_OPT_EPUB_DOWNLOAD_TIMES_GUEST) {
+                    logger.info(userId + " exceded max download times");
+                    return ResponseEntity.status(403).body("超过VIP账号每日可下载次数（" + SecurityConfig.USER_EVENT_OPT_EPUB_DOWNLOAD_TIMES_GUEST + "次），请明日继续");
+                }
+            }
+        }
+
+        //记录用户操作
+        UserEvent userEvent = new UserEvent();
+        userEvent.setUserId(userInfo.getUid());
+        userEvent.setOpt(UserEventOpt.DOWN_EPUB);
+        userEvent.setOptHow(uuid);
+        userEvent.setOptPlace(request.getRemoteAddr());
+        userEvent.setOptTime(new Date());
+        userEventMapper.insert(userEvent);
+
+        //查找电子书
         Book book = bookMapper.findBookById_NoContent(uuid);
         String filePath = book.getPath() + "\\" + book.getFilename() + ".epub";
         logger.info("Downloading:" + filePath);

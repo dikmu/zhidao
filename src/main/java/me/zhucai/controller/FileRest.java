@@ -1,4 +1,4 @@
-package me.zhucai.rest;
+package me.zhucai.controller;
 
 import me.zhucai.payload.UploadFileResponse;
 import me.zhucai.service.FileStorageService;

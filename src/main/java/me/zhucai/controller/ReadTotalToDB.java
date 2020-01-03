@@ -1,4 +1,4 @@
-package me.zhucai.rest;
+package me.zhucai.controller;
 
 import me.zhucai.bean.Book;
 import me.zhucai.localepub.EpubMeta;

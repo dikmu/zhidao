@@ -1,4 +1,4 @@
-package me.zhucai.rest;
+package me.zhucai.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import org.apache.http.HttpHost;
@@ -112,7 +112,6 @@ public class EsRest {
         String filePath = getTxtFilePath("a2d92096a04e3acbb5ac686d28e82a10");
         System.out.println(filePath);
         queryFileContent(filePath, "<em>西</em><em>夏</em>攻打金国，当然不可能讨到便宜，金国比蒙古弱，但比<em>西</em><em>夏</em>还是强的，<em>西</em><em>夏</em>军无功而返。转过年来，李安全就被干掉了。<em>西</em><em>夏</em>的宗室——齐王李遵顼杀掉李安全自立，李遵顼就是<em>夏</em>神宗。");
-
     }
 
 }
