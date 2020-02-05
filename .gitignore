@@ -25,3 +25,6 @@ nbdist/
 !/src/main/resources/static/vendors/jquery/dist/
 !/src/main/resources/static/vendors/bootstrap/dist/
 !/src/main/resources/static/build/
+src/main/java/me/zhucai/util/ConstantUtil.java
+src/main/resources/application.yml
+src/main/resources/log4j2.xml
