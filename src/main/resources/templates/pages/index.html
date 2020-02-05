@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>index</title>
+    <title>助才网</title>
 
     <script th:inline="javascript">
         var GlobalData = [[${GlobalData}]];
@@ -16,28 +16,27 @@
     </script>
 
     <!-- Bootstrap -->
-    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/res/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/res/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
-    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <link href="/res/vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- iCheck -->
-    <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <link href="/res/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
     <!-- bootstrap-progressbar -->
-    <link href="../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <link href="/res/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
     <!-- PNotify -->
-    <link href="../vendors/pnotify/dist/pnotify.css" rel="stylesheet">
-    <link href="../vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
-    <link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+    <link href="/res/vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+    <link href="/res/vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+    <link href="/res/vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
     <!-- Switchery -->
-    <link href="../vendors/switchery/dist/switchery.min.css" rel="stylesheet">
+    <link href="/res/vendors/switchery/dist/switchery.min.css" rel="stylesheet">
     <!-- PNotify -->
-    <link href="../vendors/pnotify/dist/pnotify.css" rel="stylesheet">
-    <link href="../vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
-    <!--<link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">-->
+    <link href="/res/vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+    <link href="/res/vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+    <!--<link href="/res/vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">-->
     <!-- Custom Theme Style -->
-    <link href="../build/css/custom.min.css" rel="stylesheet">
-
+    <link href="/res/build/css/custom.min.css" rel="stylesheet">
 
 </head>
 
@@ -49,46 +48,132 @@
 
         <!-- page content -->
         <div class="right_col" role="main" style="min-height: 951px;">
+            <div class="x_content">
+                <div class="row">
 
-            欢迎<span th:text = "${username}"></span>，此页面为预留页面。请点击左侧菜单选择功能。
+                    <div style="max-width:1250px; margin:100px auto">
+                        <!-- price element -->
+                        <div class="col-md-3 col-sm-6 col-xs-12" style="width:400px;">
+                            <div class="pricing" >
+                                <div class="title" style="height:100px">
+                                    <br>
+                                    <h2>热门电子书全文检索</h2>
+                                    <h5>已收纳<b> 5 </b>万本</h5>
+                                </div>
+                                <div>
+                                    <a href="/pages/BookEsSearch"><img style="width: 100%; height:230px;display: block;" src="/res/images/index/book.jpg" alt="image" /></a>
+                                    <br>
+                                    <a href="/pages/BookEsSearch" class="btn btn-primary btn-block" role="button">搜索电子书</a>
+                                </div>
+                            </div>
+                            <div class="pricing_footer">
+
+                            </div>
+                        </div>
+                        <!-- price element -->
+
+                        <!-- price element -->
+                        <div class="col-md-3 col-sm-6 col-xs-12" style="width:400px;">
+                            <div class="pricing" >
+                                <div class="title" style="height:100px">
+                                    <br>
+                                    <h2>快速购物比价</h2>
+                                    <br>
+                                </div>
+                                <div>
+                                    <a href="/pages/BuyThingsSearch" ><img style="width: 100%;height:230px; display: block;" src="/res/images/index/buy.png" alt="image" /></a>
+                                    <br>
+                                    <a href="/pages/BuyThingsSearch" class="btn btn-primary btn-block" role="button">进入比价神器</a>
+                                </div>
+                            </div>
+                            <div class="pricing_footer">
+
+                            </div>
+                        </div>
+                        <!-- price element -->
+
+                        <!-- price element -->
+                        <div class="col-md-3 col-sm-6 col-xs-12" style="width:400px;">
+                            <div class="pricing" >
+                                <div class="title" style="height:100px">
+                                    <br>
+                                    <h2>驻才网</h2>
+                                    <h5>自由顾问平台</h5>
+                                </div>
+                                <div>
+                                    <img style="width: 100%; height:230px; display: block;" src="/res/images/index/lancer.jpg" alt="image" />
+                                    <br>
+                                    <!-- Large modal -->
+                                    <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target=".bs-example-modal-lg">进入驻才网</button>
+
+                                    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                                                    </button>
+                                                    <h4 class="modal-title" id="myModalLabel">驻才网</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <br>
+                                                    <p>抱歉，功能尚未开放</p>
+                                                    <h3>若您对【自由顾问】、【自由职业】感兴趣，可加QQ群：</h3>
+                                                    <h3>自由顾问-项目交流群 241204795</h3>
+                                                    <p>群内不定期有中短期雇佣需求发出，请及时关注</p>
+                                                    <br>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pricing_footer">
+
+                            </div>
+                        </div>
+                        <!-- price element -->
+                    </div>
+                </div>
+            </div>
 
             <div class="clearfix"></div>
         </div>
         <!-- /page content -->
 
         <!-- footer content -->
-        <footer>
-            <div class="pull-right">
-                Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
-            </div>
-            <div class="clearfix"></div>
-        </footer>
+        <div th:insert="~{common :: nav_footer_bar}"></div>
         <!-- /footer content -->
     </div>
 </div>
 
 
 <!-- jQuery -->
-<script src="../vendors/jquery/dist/jquery.min.js"></script>
+<script src="/res/vendors/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap -->
-<script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/res/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
 
 <!-- FastClick -->
-<script src="../vendors/fastclick/lib/fastclick.js"></script>
+<script src="/res/vendors/fastclick/lib/fastclick.js"></script>
 <!-- NProgress -->
-<script src="../vendors/nprogress/nprogress.js"></script>
+<script src="/res/vendors/nprogress/nprogress.js"></script>
 <!-- bootstrap-progressbar -->
-<script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+<script src="/res/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
 <!-- iCheck -->
-<script src="../vendors/iCheck/icheck.min.js"></script>
+<script src="/res/vendors/iCheck/icheck.min.js"></script>
 <!-- PNotify -->
-<script src="../vendors/pnotify/dist/pnotify.js"></script>
-<script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
-<!--<script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>-->
+<script src="/res/vendors/pnotify/dist/pnotify.js"></script>
+<script src="/res/vendors/pnotify/dist/pnotify.buttons.js"></script>
+<!--<script src="/res/vendors/pnotify/dist/pnotify.nonblock.js"></script>-->
 <!-- Switchery -->
-<script src="../vendors/switchery/dist/switchery.min.js"></script>
+<script src="/res/vendors/switchery/dist/switchery.min.js"></script>
 <!-- Custom Theme Scripts -->
-<script src="../build/js/custom.js"></script>
+<script src="/res/build/js/custom.js"></script>
 
 </body>
 </html>

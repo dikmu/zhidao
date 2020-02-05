@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface UserEventService {
 
-    List<UserEvent> queryUserDailyEvent(String userId);
+    List<UserEvent> userDailyEsSearchEvent(String userId);
+
+    List<UserEvent> userDailyEpubDownloadEvent(String userId, String bookId);
 
 }

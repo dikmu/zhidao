@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="me.zhucai.mapper.SysConfigMapper">
+
+    <select id="findAll" resultType="me.zhucai.bean.SysConfig">
+        SELECT
+          key,
+          value,
+          comment
+        FROM
+          public.sys_config
+    </select>
+
+    <select id="findByKey" resultType="java.lang.String">
+        SELECT
+          value
+        FROM
+          public.sys_config t
+        WHERE
+          t.key = #{key}
+    </select>
+
+
+</mapper>

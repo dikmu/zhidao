@@ -51,8 +51,8 @@ function all(extend) {
     doing = true;
     var inter = setInterval(function () {
 		if(hasError()){
-			stopInterval(inter);
-			alert("暂停");
+			console.log("stop interval");
+			return;
 		}
         as[i].click();
         curDown++;
@@ -87,5 +87,5 @@ setInterval(function () {
         return;
     }
     allExtend();
-}, 5000);
+}, 10000);
 //next 到新页面后开始执行

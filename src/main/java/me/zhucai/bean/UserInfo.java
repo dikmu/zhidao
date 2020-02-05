@@ -1,11 +1,10 @@
 package me.zhucai.bean;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;
+import java.util.Date;
 
 /**
  * @author muhongdi
@@ -14,21 +13,28 @@ import java.lang.reflect.Field;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserInfo implements Serializable {
+@Getter
+@Setter
+public class UserInfo implements Serializable  {
+
     String uid;//用户id
     String username;//帐号
     String password;
     String salt;
     String state;
+    String description;
+    Integer activeCode;
+    Date createTime;
 
     @Override
     public String toString() {
         return "UserInfo{" +
                 "uid='" + uid + '\'' +
                 ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", salt='" + salt + '\'' +
-                ", state=" + state +
+//                ", password='" + password + '\'' +
+//                ", salt='" + salt + '\'' +
+                ", state=" + state + '\'' +
+//                ", description=" + description + '\'' +
                 '}';
     }
 

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>购物搜索</title>
+
+    <script>
+        var GlobalData = {};
+    </script>
+
+    <!-- Bootstrap -->
+    <link href="/res/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="/res/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="/res/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="/res/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- bootstrap-progressbar -->
+    <link href="/res/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <!-- PNotify -->
+    <link href="/res/vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+    <link href="/res/vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+    <link href="/res/vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+    <!-- Switchery -->
+    <link href="/res/vendors/switchery/dist/switchery.min.css" rel="stylesheet">
+    <!-- PNotify -->
+    <link href="/res/vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+    <link href="/res/vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+    <!--<link href="/res/vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">-->
+    <!-- Custom Theme Style -->
+    <link href="/res/build/css/custom.min.css" rel="stylesheet">
+
+    <style>
+        .shopList {
+            margin: 30px auto 20px auto;
+        }
+
+        .shopList input {
+            margin-top: 10px;
+            width: 100px;
+        }
+
+        hr{
+            width:80%;
+        }
+    </style>
+
+</head>
+
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+
+        <div>
+            <div th:fragment="nav_menu_bar">
+
+                <!-- top navigation -->
+                <div class="top_nav">
+                    <div class="nav_menu">
+                        <nav>
+                            <div class="nav toggle">
+                                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                            </div>
+
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="">
+                                    <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
+                                       aria-expanded="false">
+                                        <!--<img src="../images/img.jpg" alt="">-->
+                                        <span></span>
+                                        <span class=" fa fa-angle-down"></span>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-usermenu pull-right">
+                                        <li><a href="javascript:;"> Profile</a></li>
+                                        <li>
+                                            <a href="javascript:;">
+                                                <span class="badge bg-red pull-right">50%</span>
+                                                <span>Settings</span>
+                                            </a>
+                                        </li>
+                                        <li><a href="javascript:;">Help</a></li>
+                                        <li><a href="/logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                                    </ul>
+                                </li>
+
+                                <!--<li role="presentation" class="dropdown">-->
+                                <!--<a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown"-->
+                                <!--aria-expanded="false">-->
+                                <!--<i class="fa fa-envelope-o"></i>-->
+                                <!--<span class="badge bg-green">6</span>-->
+                                <!--</a>-->
+                                <!--<ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">-->
+                                <!--<li>-->
+                                <!--<a>-->
+                                <!--<span class="image"><img src="../images/img.jpg" alt="Profile Image"/></span>-->
+                                <!--<span>-->
+                                <!--<span>John Smith</span>-->
+                                <!--<span class="time">3 mins ago</span>-->
+                                <!--</span>-->
+                                <!--<span class="message">-->
+                                <!--Film festivals used to be do-or-die moments for movie makers. They were where...-->
+                                <!--</span>-->
+                                <!--</a>-->
+                                <!--</li>-->
+                                <!--<li>-->
+                                <!--<a>-->
+                                <!--<span class="image"><img src="../images/img.jpg" alt="Profile Image"/></span>-->
+                                <!--<span>-->
+                                <!--<span>John Smith</span>-->
+                                <!--<span class="time">3 mins ago</span>-->
+                                <!--</span>-->
+                                <!--<span class="message">-->
+                                <!--Film festivals used to be do-or-die moments for movie makers. They were where...-->
+                                <!--</span>-->
+                                <!--</a>-->
+                                <!--</li>-->
+                                <!--<li>-->
+                                <!--<a>-->
+                                <!--<span class="image"><img src="../images/img.jpg" alt="Profile Image"/></span>-->
+                                <!--<span>-->
+                                <!--<span>John Smith</span>-->
+                                <!--<span class="time">3 mins ago</span>-->
+                                <!--</span>-->
+                                <!--<span class="message">-->
+                                <!--Film festivals used to be do-or-die moments for movie makers. They were where...-->
+                                <!--</span>-->
+                                <!--</a>-->
+                                <!--</li>-->
+                                <!--<li>-->
+                                <!--<a>-->
+                                <!--<span class="image"><img src="../images/img.jpg" alt="Profile Image"/></span>-->
+                                <!--<span>-->
+                                <!--<span>John Smith</span>-->
+                                <!--<span class="time">3 mins ago</span>-->
+                                <!--</span>-->
+                                <!--<span class="message">-->
+                                <!--Film festivals used to be do-or-die moments for movie makers. They were where...-->
+                                <!--</span>-->
+                                <!--</a>-->
+                                <!--</li>-->
+                                <!--<li>-->
+                                <!--<div class="text-center">-->
+                                <!--<a>-->
+                                <!--<strong>See All Alerts</strong>-->
+                                <!--<i class="fa fa-angle-right"></i>-->
+                                <!--</a>-->
+                                <!--</div>-->
+                                <!--</li>-->
+                                <!--</ul>-->
+                                <!--</li>-->
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <!-- /top navigation -->
+            </div>
+
+        </div>
+
+        <!-- page content -->
+        <div class="right_col" role="main" style="min-height: 951px;text-align: center;">
+
+            <div style="margin-top:100px;">
+                <div style="font-size:3em">购物搜索 </div>
+                <input id="_in" type="text" class="form-control" style="width:50%;min-width:400px; margin:20px auto 20px auto" placeholder="输入商品名称"></input>
+                <hr>
+                <div class="shopList">
+                    知乎、什么值得买
+                    <br>
+                    <input type="button" onclick="search1()" value="搜索"></input>
+                </div>
+                <hr>
+                <div class="shopList">
+                    网易严选、小米有品、无印良品、凡客、聚美优品、网易考拉、唯品会、小红书
+                    <br><input type="button" onclick="search2()" value="搜索"></input>
+                </div>
+                <hr>
+                <div class="shopList">
+                    京东、天猫、淘宝、亚马逊、当当、拼多多
+                    <br><input type="button" onclick="search3()" value="搜索"></input>
+                </div>
+                <hr>
+                <div class="shopList">
+                    苏宁易购、国美、家乐福、1号店、宜家
+                    <br><input type="button" onclick="search4()" value="搜索"></input>
+                </div>
+                <hr>
+                <div class="shopList">
+                    美团、糯米
+                    <br><input type="button" onclick="search5()" value="搜索"></input>
+                </div>
+                <hr>
+                <div class="shopList">
+                    华为、Apple苹果、TCL、美的、格力、海信、海尔
+                    <br><input type="button" onclick="search6()" value="搜索"></input>
+                </div>
+
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+            <div class="pull-right">
+                Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+            </div>
+            <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+    </div>
+</div>
+
+
+<!-- jQuery -->
+<script src="/res/vendors/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="/res/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<!-- FastClick -->
+<script src="/res/vendors/fastclick/lib/fastclick.js"></script>
+<!-- NProgress -->
+<script src="/res/vendors/nprogress/nprogress.js"></script>
+<!-- bootstrap-progressbar -->
+<script src="/res/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+<!-- iCheck -->
+<script src="/res/vendors/iCheck/icheck.min.js"></script>
+<!-- PNotify -->
+<script src="/res/vendors/pnotify/dist/pnotify.js"></script>
+<script src="/res/vendors/pnotify/dist/pnotify.buttons.js"></script>
+<!--<script src="/res/vendors/pnotify/dist/pnotify.nonblock.js"></script>-->
+<!-- Switchery -->
+<script src="/res/vendors/switchery/dist/switchery.min.js"></script>
+<!-- Custom Theme Scripts -->
+<script src="/res/build/js/custom.js"></script>
+
+<script src="/res/js/buyThingsSearch.js"></script>
+
+<script>
+    setTimeout(function(){$("#menu_toggle").click();},1000);
+</script>
+
+</body>
+</html>

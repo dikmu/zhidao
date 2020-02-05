@@ -8,28 +8,43 @@
           user_info.password,
           user_info.salt,
           user_info.state,
-          user_info.username
+          user_info.username,
+          user_info.description,
+          user_info.active_code activeCode
         FROM
           user_info user_info
         WHERE username=#{username}
     </select>
 
+    <select id="checkUserExists" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(1) from user_info where username = #{username}
+    </select>
+
     <insert id="insert" parameterType="me.zhucai.bean.UserInfo">
         INSERT INTO user_info
             (uid,
-            name,
             password,
             salt,
             state,
-            username)
+            username,
+            description,
+            active_code)
         VALUES
             (
             #{uid},
-            #{name},
             #{password},
             #{salt},
             #{state},
-            #{username}
+            #{username},
+            #{description},
+            #{activeCode}
             )
     </insert>
+
+    <update id="update" parameterType="me.zhucai.bean.UserInfo">
+        UPDATE public.user_info
+        SET state=#{state}, active_code=#{activeCode}, description=#{description}
+        WHERE username=#{username};
+    </update>
+
 </mapper>

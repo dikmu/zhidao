@@ -15,4 +15,8 @@ public interface UserInfoMapper {
 
     int insert(UserInfo userInfo);
 
+    int checkUserExists(@Param("username") String username);
+
+    void update(UserInfo userInfo);
+
 }

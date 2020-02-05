@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>激活成功</title>
+
+    <!-- Bootstrap -->
+    <link href="/res/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="/res/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link href="/res/build/css/custom.min.css" rel="stylesheet">
+    <!-- PNotify -->
+</head>
+
+<body class="login">
+<div>
+
+    <div class="login_wrapper">
+        <div class="animate form login_form">
+            <section class="login_content">
+                <form>
+                    <h1>您的账号已成功激活</h1>
+                    <br>
+                    <div style="min-height:350px;">
+                        <h4>即将为您跳转</h4>
+                        <br>
+                        <br>
+                        <a id="loginImm" href="/login.html"><h4>立即跳转</h4></a>
+                    </div>
+                    <div id="message">
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <div class="separator">
+                        <!--<p class="change_link">没有账号?-->
+                        <!--<a href="#signup" class="to_register"> 注册新用户 </a>-->
+                        <!--</p>-->
+
+                        <div class="clearfix"></div>
+                        <br/>
+
+                        <div>
+                            <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
+                            <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and
+                                Terms</p>
+                        </div>
+                    </div>
+                </form>
+            </section>
+        </div>
+
+    </div>
+</div>
+<!-- jQuery -->
+<script src="/res/vendors/jquery/dist/jquery.min.js"></script>
+<script>
+    var uname = location.search.split("=")[1];
+    $('#loginImm')[0].href = "/login?uname=" + uname;
+
+    // setTimeout(function () {
+    //     location.href = "/login?uname=" + uname;
+    // }, 3000)
+</script>
+</body>
+</html>
