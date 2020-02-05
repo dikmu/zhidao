@@ -2,7 +2,7 @@
 <Configuration status="debug" strict="true" name="XMLConfigTest"
                packages="org.apache.logging.log4j.test">
     <Properties>
-        <Property name="filename">d:/applog/zhidao.log</Property>
+        <Property name="filename">F:/WS/ws_github/logs/zhidao.log</Property>
     </Properties>
     <Filter type="ThresholdFilter" level="trace"/>
 
