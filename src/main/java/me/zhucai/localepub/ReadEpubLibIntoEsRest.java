@@ -13,6 +13,7 @@ import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
+import org.elasticsearch.action.get.GetRequest;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.client.RestClient;
@@ -68,7 +69,7 @@ public class ReadEpubLibIntoEsRest {
 
     static boolean pushToES = true;
     //    static boolean pushToES = false;
-    static boolean pushToDB = true;
+    static boolean pushToDB = false;
     static boolean pushNameToDB = true;
 
     public static int maxcount = 0;
@@ -295,10 +296,21 @@ public class ReadEpubLibIntoEsRest {
         GlobalIndex++;
         try {
             if (pushToES) {
-                IndexResponse indexResponse = client.index(request);
-                System.out.println(
-                        "push ES Status:" + indexResponse.status() + ",Title:" + jsonMap.get("Title") + ",TitleMD5:" + titleMd5
-                                + ",GlobalIndex" + GlobalIndex);
+                //是否已有此书
+                GetRequest getRequest = new GetRequest(
+                        "store",
+                        "epub",
+                        epubMeta.getUuid());
+                boolean exists = client.exists(getRequest);
+                if (!exists) {
+                    //推送到此书
+                    IndexResponse indexResponse = client.index(request);
+                    System.out.println(
+                            "push ES Status:" + indexResponse.status() + ",Title:" + jsonMap.get("Title") + ",TitleMD5:" + titleMd5
+                                    + ",GlobalIndex" + GlobalIndex);
+                } else {
+                    System.out.println(jsonMap.get("Title") + "," + epubMeta.getUuid() + ",已存在，不推送到ES");
+                }
             } else {
                 System.out.println(
                         "Status: not push" + ",Title:" + jsonMap.get("Title") + ",TitleMD5:" + titleMd5 + ",GlobalIndex"
