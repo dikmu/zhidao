@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Date;
 
 /**
  * All page direct
@@ -115,6 +116,61 @@ public class PageDirectController {
         setCommonMenuNavData(model);
         model.addAttribute("PageId", PAGE_ID_BOOK_DB_SEARCH);
         return "/pages/BookDbSearch";
+    }
+
+    @GetMapping(value = "/pages/UserProfile")
+    public String userProfile(Model model) {
+        setCommonMenuNavData(model);
+        model.addAttribute("PageId", "UserProfile");
+        Date expireDate = new SysUserRoleController().findSysUserRoleByUserId("").getDate("expireDate");
+        model.addAttribute("expireDate", expireDate);
+        return "/pages/UserProfile";
+    }
+
+    @GetMapping(value = "/pages/ChangePassword")
+    public String userChangePassword(Model model) {
+        setCommonMenuNavData(model);
+        model.addAttribute("PageId", "ChangePassword");
+        return "/pages/ChangePassword";
+    }
+
+    @GetMapping(value = "/pages/BuyBookVip")
+    public String pay(Model model) {
+        setCommonMenuNavData(model);
+        model.addAttribute("PageId", "BuyBookVip");
+        return "/pages/BuyBookVip";
+    }
+
+    @GetMapping(value = "/pages/VipAdmin")
+    public String vipAdmin(Model model) {
+        setCommonMenuNavData(model);
+        model.addAttribute("PageId", "VipAdmin");
+        return "/pages/VipAdmin";
+    }
+
+    @GetMapping(value = "/pages/RegisterSuccess")
+    public String registerSuccess(Model model) {
+        setCommonMenuNavData(model);
+        model.addAttribute("PageId", "RegisterSuccess");
+        return "/pages/RegisterSuccess";
+    }
+
+    @GetMapping(value = "/pages/ActiveAccount")
+    public String activeAccount(Model model) {
+        model.addAttribute("PageId", "ActiveAccount");
+        return "/pages/ActiveAccount";
+    }
+
+    @GetMapping(value = "/pages/ActiveSuccess")
+    public String activeSuccess(Model model) {
+        model.addAttribute("PageId", "ActiveSuccess");
+        return "/pages/ActiveSuccess";
+    }
+
+    @GetMapping(value = "/pages/ResetPassword")
+    public String resetPassword(Model model) {
+        model.addAttribute("PageId", "ResetPassword");
+        return "/pages/ResetPassword";
     }
 
 //    @PostMapping({"/", "/pages/BookDetail"})

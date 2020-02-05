@@ -24,12 +24,13 @@ public class SysMenu {
         children = new ArrayList<>();
     }
 
-    public SysMenu(String name, String link) {
+    public SysMenu(String name, String link, String icon) {
         this.name = name;
         this.link = link;
+        this.icon = icon;
         this.dir = false;
     }
-    
+
 //    public SysMenu(String name, String link, String target) {
 //        this.name = name;
 //        this.link = link;

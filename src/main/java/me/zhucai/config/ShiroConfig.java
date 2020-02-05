@@ -1,5 +1,6 @@
 package me.zhucai.config;
 
+import me.zhucai.util.ShiroUtil;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.mgt.SecurityManager;
@@ -66,7 +67,7 @@ public class ShiroConfig {
     public HashedCredentialsMatcher hashedCredentialsMatcher() {
         HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
         hashedCredentialsMatcher.setHashAlgorithmName("md5");//散列算法:这里使用MD5算法;
-        hashedCredentialsMatcher.setHashIterations(2);//散列的次数，比如散列两次，相当于 md5(md5(""));
+        hashedCredentialsMatcher.setHashIterations(ShiroUtil.HASH_ITERATION);//散列的次数，比如散列两次，相当于 md5(md5(""));
         hashedCredentialsMatcher.setStoredCredentialsHexEncoded(false);
         return hashedCredentialsMatcher;
     }

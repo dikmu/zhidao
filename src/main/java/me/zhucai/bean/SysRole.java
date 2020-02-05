@@ -1,8 +1,6 @@
 package me.zhucai.bean;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.io.Serializable;
 
@@ -13,6 +11,8 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class SysRole  implements Serializable {
     String id;
     String role;//角色标识程序中判断使用,如"admin",这个是唯一的:

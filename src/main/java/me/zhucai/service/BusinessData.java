@@ -19,12 +19,13 @@ public class BusinessData {
 //        if (SecurityUtils.getSubject() != null && SecurityUtils.getSubject().hasRole("admin")) {
 //            menu1.getChildren().add(new SysMenu("全文精确搜索", PageDirectController.PAGE_ID_BOOK_DB_SEARCH));
 //        }
-        list.add(new SysMenu("电子书搜索", "/pages/" + PageDirectController.PAGE_ID_BOOK_ES_SEARCH));
-        list.add(new SysMenu("购物比价神器", "/pages/" + PageDirectController.PAGE_ID_BUY_THINGS_SEARCH));
+        list.add(new SysMenu("电子书搜索", "/pages/" + PageDirectController.PAGE_ID_BOOK_ES_SEARCH,"fa fa-database"));
+        list.add(new SysMenu("购物比价神器", "/pages/" + PageDirectController.PAGE_ID_BUY_THINGS_SEARCH,"fa fa-gift"));
         //
         if (SecurityUtils.getSubject() != null && SecurityUtils.getSubject().hasRole("admin")) {
-            list.add(new SysMenu("各大平台课程搜索", "/pages/" + PageDirectController.PAGE_ID_CLASS_SEARCH));
-            list.add(new SysMenu("各硬盘资料搜索", "/pages/" + PageDirectController.PAGE_ID_DISK_FILE_SEARCH));
+            list.add(new SysMenu("各大平台课程搜索", "/pages/" + PageDirectController.PAGE_ID_CLASS_SEARCH,"fa fa-graduation-cap"));
+            list.add(new SysMenu("各硬盘资料搜索", "/pages/" + PageDirectController.PAGE_ID_DISK_FILE_SEARCH,"fa fa-database"));
+            list.add(new SysMenu("VIP管理", "/pages/VipAdmin","fa fa-users"));
         }
         return list;
     }

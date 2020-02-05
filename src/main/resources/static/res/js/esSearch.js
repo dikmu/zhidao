@@ -257,7 +257,7 @@ function preventTimeout() {
         $.ajax({
             type: "get",
             contentType: "application/json",
-            url: "/user/preventTimeout"
+            url: "/system/preventTimeout"
         });
     }, 600000)//10min
 }

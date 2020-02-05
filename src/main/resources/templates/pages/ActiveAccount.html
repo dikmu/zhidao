@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>激活账号</title>
+
+    <!-- Bootstrap -->
+    <link href="/res/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="/res/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link href="/res/build/css/custom.min.css" rel="stylesheet">
+    <!-- PNotify -->
+    <link href="/res/vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+    <link href="/res/vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+</head>
+
+<body class="login">
+<div>
+
+    <div class="login_wrapper">
+        <div class="animate form login_form">
+            <section class="login_content">
+                <form>
+                    <h1>激活账号</h1>
+                    <br>
+                    <div>
+                        <h2>请前往您的邮箱：<span id="uname"></span></h2>
+                        <h2>查找激活码</h2>
+                    </div>
+                    <div style="min-height:350px">
+                        <input id="activeCode" type="text" class="form-control" placeholder="输入激活码" required=""/>
+                        <button id="activeFn" class="btn btn-default submit"> 激活</button>
+                        <div style="text-align: left;margin-top:100px">
+                            若未收到激活码，可尝试如下方法：<br>
+                            1.若邮箱地址有误，可重新注册您的账号<br>
+                            2.检查邮箱中的归档邮件、广告、垃圾邮件<br>
+                            3.发邮件给驻才网管理员(muhongdi@zhucai.me)，解决您的问题<br>
+                        </div>
+                    </div>
+                    <div id="message">
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <div class="separator">
+                        <!--<p class="change_link">没有账号?-->
+                        <!--<a href="#signup" class="to_register"> 注册新用户 </a>-->
+                        <!--</p>-->
+
+                        <div class="clearfix"></div>
+                        <br/>
+
+                        <div>
+                            <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
+                            <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and
+                                Terms</p>
+                        </div>
+                    </div>
+                </form>
+            </section>
+        </div>
+
+    </div>
+</div>
+<!-- jQuery -->
+<script src="/res/vendors/jquery/dist/jquery.min.js"></script>
+<!-- PNotify -->
+<script src="/res/vendors/pnotify/dist/pnotify.js"></script>
+<script src="/res/vendors/pnotify/dist/pnotify.buttons.js"></script>
+
+<script>
+    var uname = location.search.split("=")[1];
+    $('#uname')[0].innerHTML = uname;
+
+    $("#activeFn").on('click', function (e) {
+        e.preventDefault();
+        var activeCode = $("#activeCode").val();
+        $.ajax({
+            type: "post",
+            contentType: "application/json",
+            url: "/register/active",
+            data: JSON.stringify({
+                username: uname,
+                activeCode: activeCode,
+            }),
+            success: function (result) {
+                var splits = result.split(":");
+                if (splits[0] == 'redirect') {//success
+                    location.href = splits[1] + "?uname=" + uname;
+                    return;
+                } else {//error
+                    new PNotify({
+                        title: splits[0] == 'error' ? '错误' : '消息',
+                        text: splits[1],
+                        type: splits[0],
+                        styling: 'bootstrap3'
+                    });
+                }
+            },
+            error: function (result) {
+                new PNotify({
+                    title: result.status,
+                    text: '系统错误,请联系管理员或者稍后再试',
+                    type: 'error',
+                    styling: 'bootstrap3'
+                });
+            }
+        });
+    })
+</script>
+</body>
+</html>

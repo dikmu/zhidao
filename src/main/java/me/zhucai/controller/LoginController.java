@@ -61,5 +61,13 @@ public class LoginController {
         return result;
     }
 
+//    @PostMapping(value = "/register")
+//    public JSONObject register(HttpServletRequest request, @RequestBody JSONObject loginJson) {
+//        logger.info("try register");
+//        String username = loginJson.getString("username");
+//        String password1 = loginJson.getString("password1");
+//        Boolean password2 = loginJson.getBoolean("password2");
+//    }
+
 
 }
